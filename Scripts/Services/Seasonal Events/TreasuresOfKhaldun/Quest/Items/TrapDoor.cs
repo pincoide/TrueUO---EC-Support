@@ -152,7 +152,7 @@ namespace Server.Engines.Khaldun
 
         private class TrapDoorPrompt : Prompt
         {
-            public override int MessageCliloc => 1158557;
+            public override int MessageCliloc => 1158557; // The door is secured with an alpha-numeric lock, how do you wish to arrange the mechanism?
 
             public TrapDoor Door { get; }
 

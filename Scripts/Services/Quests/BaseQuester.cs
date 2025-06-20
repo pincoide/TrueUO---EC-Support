@@ -9,7 +9,7 @@ namespace Server.Engines.Quests
     {
         private readonly BaseQuester m_Quester;
         public TalkEntry(BaseQuester quester)
-            : base(quester.TalkNumber)
+            : base(quester.TalkNumber, -1, 303)
         {
             m_Quester = quester;
         }

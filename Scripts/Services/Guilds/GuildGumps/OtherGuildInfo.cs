@@ -1,6 +1,8 @@
 using Server.Gumps;
+using Server.Items;
 using Server.Mobiles;
 using Server.Network;
+using Server.Prompts;
 using System;
 
 namespace Server.Guilds
@@ -404,10 +406,7 @@ namespace Server.Guilds
                                 pm.SendLocalizedMessage(1063427, guild.Name); // ~1_val~ is currently involved in a guild war.
                             }
                             else
-                            {
-                                pm.SendLocalizedMessage(1063439); // Enter a name for the new alliance:
-                                pm.BeginPrompt(CreateAlliance_Callback);
-                            }
+                                pm.Prompt = new GuildAllianceNamePrompt( guild, m_Other );
                         }
                         #endregion
                         #region Existing Alliance
@@ -560,54 +559,68 @@ namespace Server.Guilds
             }
         }
 
-        public void CreateAlliance_Callback(Mobile from, string text)
+        private class GuildAllianceNamePrompt : Prompt
         {
-            PlayerMobile pm = (PlayerMobile) from;
+            public override int MessageCliloc => 1063439; // Enter a name for the new alliance:
+            private readonly Guild m_Guild;
+            private readonly Guild m_Other;
 
-            AllianceInfo alliance = guild.Alliance;
-            AllianceInfo otherAlliance = m_Other.Alliance;
-
-            if (!IsMember(from, guild) || alliance != null)
+            public GuildAllianceNamePrompt( Guild guild, Guild otherGuild )
+                : base( 61 )
             {
-                return;
+                m_Guild = guild;
+                m_Other = otherGuild;
             }
 
-            RankDefinition playerRank = pm.GuildRank;
+            public override void OnResponse( Mobile from, string text )
+            {
+                PlayerMobile pm = (PlayerMobile) from;
 
-            if (!playerRank.GetFlag(RankFlags.AllianceControl))
-            {
-                pm.SendLocalizedMessage(1070747); // You don't have permission to create an alliance.
-            }
-            else if (otherAlliance != null)
-            {
-                // ~1_val~ is currently considering another alliance proposal. | // ~1_val~ already belongs to an alliance.
-                pm.SendLocalizedMessage(otherAlliance.IsPendingMember(m_Other) ? 1063416 : 1063426, m_Other.Name);
-            }
-            else if (m_Other.AcceptedWars.Count > 0 || m_Other.PendingWars.Count > 0)
-            {
-                pm.SendLocalizedMessage(1063427, m_Other.Name); // ~1_val~ is currently involved in a guild war.
-            }
-            else if (guild.AcceptedWars.Count > 0 || guild.PendingWars.Count > 0)
-            {
-                pm.SendLocalizedMessage(1063427, guild.Name); // ~1_val~ is currently involved in a guild war.
-            }
-            else
-            {
-                string name = Utility.FixHtml(text.Trim());
+                AllianceInfo alliance = m_Guild.Alliance;
+                AllianceInfo otherAlliance = m_Other.Alliance;
 
-                if (!CheckProfanity(name))
-                    pm.SendLocalizedMessage(1070886); // That alliance name is not allowed.
-                else if (name.Length > Guild.NameLimit)
-                    pm.SendLocalizedMessage(1070887, Guild.NameLimit.ToString()); // An alliance name cannot exceed ~1_val~ characters in length.
-                else if (AllianceInfo.Alliances.ContainsKey(name.ToLower()))
-                    pm.SendLocalizedMessage(1063428); // That alliance name is not available.
+                if ( !IsMember( from, m_Guild ) || alliance != null )
+                {
+                    return;
+                }
+
+                RankDefinition playerRank = pm.GuildRank;
+
+                if ( !playerRank.GetFlag( RankFlags.AllianceControl ) )
+                {
+                    pm.SendLocalizedMessage( 1070747 ); // You don't have permission to create an alliance.
+                }
+                else if ( otherAlliance != null )
+                {
+                    // ~1_val~ is currently considering another alliance proposal. | // ~1_val~ already belongs to an alliance.
+                    pm.SendLocalizedMessage( otherAlliance.IsPendingMember( m_Other ) ? 1063416 : 1063426, m_Other.Name );
+                }
+                else if ( m_Other.AcceptedWars.Count > 0 || m_Other.PendingWars.Count > 0 )
+                {
+                    pm.SendLocalizedMessage( 1063427, m_Other.Name ); // ~1_val~ is currently involved in a guild war.
+                }
+                else if ( m_Guild.AcceptedWars.Count > 0 || m_Guild.PendingWars.Count > 0 )
+                {
+                    pm.SendLocalizedMessage( 1063427, m_Guild.Name ); // ~1_val~ is currently involved in a guild war.
+                }
                 else
                 {
-                    pm.SendLocalizedMessage(1070750, m_Other.Name); // An invitation to join your alliance has been sent to ~1_val~.
+                    string name = Utility.FixHtml(text.Trim());
 
-                    m_Other.GuildMessage(1070780, guild.Name); // ~1_val~ has proposed an alliance.
+                    if ( !CheckProfanity( name ) )
+                        pm.SendLocalizedMessage( 1070886 ); // That alliance name is not allowed.
+                    else if ( name.Length > Guild.NameLimit )
+                        pm.SendLocalizedMessage( 1070887, Guild.NameLimit.ToString() ); // An alliance name cannot exceed ~1_val~ characters in length.
+                    else if ( AllianceInfo.Alliances.ContainsKey( name.ToLower() ) )
+                        pm.SendLocalizedMessage( 1063428 ); // That alliance name is not available.
+                    else
+                    {
+                        pm.SendLocalizedMessage( 1070750, m_Other.Name ); // An invitation to join your alliance has been sent to ~1_val~.
 
-                    new AllianceInfo(guild, name, m_Other);
+                        m_Other.GuildMessage( 1070780, m_Guild.Name ); // ~1_val~ has proposed an alliance.
+
+                        new AllianceInfo( m_Guild, name, m_Other );
+                    }
                 }
             }
         }

@@ -290,7 +290,7 @@ namespace Server.Engines.Mahjong
         {
             private readonly MahjongGame m_Game;
             public ResetGameEntry(MahjongGame game)
-                : base(6162)
+                : base(6162, -1, 12)
             {
                 m_Game = game;
             }

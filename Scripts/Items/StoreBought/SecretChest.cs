@@ -131,7 +131,7 @@ namespace Server.Items
             private readonly Mobile Mobile;
 
             public SetEditKeyNumber(Mobile m, SecretChest c)
-                : base(1151608, -1) // Set/Edit Key Number
+                : base(1151608, -1, 420) // Set/Edit Key Number
             {
                 Mobile = m;
                 Chest = c;
@@ -160,7 +160,7 @@ namespace Server.Items
             private readonly Mobile Mobile;
 
             public ResetKeyNumber(Mobile m, SecretChest c)
-                : base(1151609, -1) // Reset Key Number
+                : base(1151609, -1, 421) // Reset Key Number
             {
                 Mobile = m;
                 Chest = c;

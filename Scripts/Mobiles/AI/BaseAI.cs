@@ -120,8 +120,8 @@ namespace Server.Mobiles
             private readonly BaseAI m_AI;
             private readonly LastOrderType m_Order;
 
-            public InternalEntry(Mobile from, int number, int range, BaseCreature mobile, BaseAI ai, LastOrderType order)
-                : base(number, range)
+            public InternalEntry(Mobile from, int number, int range, BaseCreature mobile, BaseAI ai, LastOrderType order, int returnCode = -1)
+                : base(number, range, returnCode)
             {
                 m_From = from;
                 m_Mobile = mobile;
@@ -220,23 +220,23 @@ namespace Server.Mobiles
             {
                 if (from == m_Mobile.ControlMaster)
                 {
-                    list.Add(new InternalEntry(from, 6111, 14, m_Mobile, this, LastOrderType.Attack)); // Command: Kill
-                    list.Add(new InternalEntry(from, 6108, 14, m_Mobile, this, LastOrderType.Follow)); // Command: Follow
-                    list.Add(new InternalEntry(from, 6107, 14, m_Mobile, this, LastOrderType.Guard)); // Command: Guard
+                    list.Add(new InternalEntry(from, 6111, 14, m_Mobile, this, LastOrderType.Attack, 134)); // Command: Kill
+                    list.Add(new InternalEntry(from, 6108, 14, m_Mobile, this, LastOrderType.Follow, 131)); // Command: Follow
+                    list.Add(new InternalEntry(from, 6107, 14, m_Mobile, this, LastOrderType.Guard, 130)); // Command: Guard
 
                     if (m_Mobile.IsBonded)
                     {
                         list.Add(new InternalEntry(from, 6109, 14, m_Mobile, this, LastOrderType.Drop)); // Command: Drop
                     }
 
-                    list.Add(new InternalEntry(from, 6112, 14, m_Mobile, this, LastOrderType.Stop)); // Command: Stop
-                    list.Add(new InternalEntry(from, 6114, 14, m_Mobile, this, LastOrderType.Stay)); // Command: Stay
+                    list.Add(new InternalEntry(from, 6112, 14, m_Mobile, this, LastOrderType.Stop, 135)); // Command: Stop
+                    list.Add(new InternalEntry(from, 6114, 14, m_Mobile, this, LastOrderType.Stay, 137)); // Command: Stay
 
                     if (!m_Mobile.Summoned && !(m_Mobile is GrizzledMare))
                     {
-                        list.Add(new InternalEntry(from, 6110, 14, m_Mobile, this, LastOrderType.Friend)); // Add Friend
-                        list.Add(new InternalEntry(from, 6099, 14, m_Mobile, this, LastOrderType.Unfriend)); // Remove Friend
-                        list.Add(new InternalEntry(from, 6113, 14, m_Mobile, this, LastOrderType.Transfer)); // Transfer
+                        list.Add(new InternalEntry(from, 6110, 14, m_Mobile, this, LastOrderType.Friend, 133)); // Add Friend
+                        list.Add(new InternalEntry(from, 6099, 14, m_Mobile, this, LastOrderType.Unfriend, 140)); // Remove Friend
+                        list.Add(new InternalEntry(from, 6113, 14, m_Mobile, this, LastOrderType.Transfer, 136)); // Transfer
                     }
 
                     list.Add(
@@ -250,9 +250,9 @@ namespace Server.Mobiles
                 }
                 else if (m_Mobile.IsPetFriend(from))
                 {
-                    list.Add(new InternalEntry(from, 6108, 14, m_Mobile, this, LastOrderType.Follow)); // Command: Follow
-                    list.Add(new InternalEntry(from, 6112, 14, m_Mobile, this, LastOrderType.Stop)); // Command: Stop
-                    list.Add(new InternalEntry(from, 6114, 14, m_Mobile, this, LastOrderType.Stay)); // Command: Stay
+                    list.Add(new InternalEntry(from, 6108, 14, m_Mobile, this, LastOrderType.Follow, 131)); // Command: Follow
+                    list.Add(new InternalEntry(from, 6112, 14, m_Mobile, this, LastOrderType.Stop, 135)); // Command: Stop
+                    list.Add(new InternalEntry(from, 6114, 14, m_Mobile, this, LastOrderType.Stay, 137)); // Command: Stay
                 }
             }
         }

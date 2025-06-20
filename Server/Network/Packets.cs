@@ -262,7 +262,7 @@ namespace Server.Network
 			Serial senderSerial = prompt.Sender != null ? prompt.Sender.Serial : to.Serial;
 
 			m_Stream.Write(senderSerial);
-			m_Stream.Write(prompt.TypeId); //0x2C
+			m_Stream.Write(prompt.TypeId);
 			m_Stream.Write(0); // type
 			m_Stream.Write(0); // language
 			m_Stream.Write((short)0); // text
@@ -377,9 +377,14 @@ namespace Server.Network
 				ContextMenuEntry e = entries[i];
 
 				m_Stream.Write(e.Number);
-				m_Stream.Write((short)i);
 
-				int range = e.Range;
+                // if we have a return code we send that instead of the index
+                if ( e.ReturnCode != -1 )
+                    m_Stream.Write( (short)e.ReturnCode );
+                else
+                    m_Stream.Write( (short)i );
+
+                int range = e.Range;
 
 				if (range == -1)
 				{

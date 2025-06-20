@@ -15,6 +15,8 @@ namespace Server.Engines.CityLoyalty
 
         public BaseCityGump(PlayerMobile pm) : base(pm, 120, 120)
         {
+            TypeID = 999060;
+
             Citizenship = CityLoyaltySystem.GetCitizenship(User, false);
 
             pm.CloseGump(typeof(BaseCityGump));
@@ -22,7 +24,9 @@ namespace Server.Engines.CityLoyalty
 
         public override void AddGumpLayout()
         {
-            AddHtmlLocalized(0, 7, 345, 20, 1154645, "#1152190", 0, false, false); // City Loyalty
+            TypeID = 999060;
+
+            AddHtmlLocalized( 0, 8, 345, 20, 1152188, false, false ); // <center>City Loyalty</center>
 
             AddImage(0, 0, 8000);
             AddImage(20, 37, 8001);

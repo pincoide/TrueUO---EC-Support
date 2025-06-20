@@ -52,7 +52,8 @@ namespace Server.Items
             private readonly Mobile m_Mobile;
             private readonly ExodusTomeAltar m_altar;
 
-            public BeginTheRitual(ExodusTomeAltar altar, Mobile from) : base(1153608, 2) // Begin the Ritual
+            public BeginTheRitual(ExodusTomeAltar altar, Mobile from)
+                : base(1153608, 2, 339) // Begin the Ritual
             {
                 m_Mobile = from;
                 m_altar = altar;

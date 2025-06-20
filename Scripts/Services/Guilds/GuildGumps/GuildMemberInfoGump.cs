@@ -1,6 +1,7 @@
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Network;
+using Server.Prompts;
 
 namespace Server.Guilds
 {
@@ -20,6 +21,8 @@ namespace Server.Guilds
 
         public override void PopulateGump()
         {
+            TypeID = 728;
+
             AddPage(0);
 
             AddBackground(0, 0, 350, 255, 0x242C);
@@ -126,11 +129,8 @@ namespace Server.Guilds
                 case 3:	//Set Guild title
                     {
                         if (playerRank.GetFlag(RankFlags.CanSetGuildTitle) && (playerRank.Rank > targetRank.Rank || m_Member == player))
-                        {
-                            pm.SendLocalizedMessage(1011128); // Enter the new title for this guild member or 'none' to remove a title:
+                            pm.Prompt = new GuildTitlePrompt( guild, m_Member );
 
-                            pm.BeginPrompt(SetTitle_Callback);
-                        }
                         else if (m_Member.GuildTitle == null || m_Member.GuildTitle.Length <= 0)
                         {
                             pm.SendLocalizedMessage(1070746); // You don't have the permission to set that member's guild title.
@@ -188,35 +188,52 @@ namespace Server.Guilds
 
         public void SetTitle_Callback(Mobile from, string text)
         {
-            PlayerMobile pm = from as PlayerMobile;
-            PlayerMobile targ = m_Member;
+            
+        }
 
-            if (pm == null || targ == null)
-                return;
+        private class GuildTitlePrompt : Prompt
+        {
+            public override int MessageCliloc => 1011128; // Enter the new title for this guild member or 'none' to remove a title:
+            private readonly Guild m_Guild;
+            private readonly PlayerMobile m_Member;
 
-            Guild g = targ.Guild as Guild;
 
-            if (g == null || !IsMember(pm, g) || !(pm.GuildRank.GetFlag(RankFlags.CanSetGuildTitle) && (pm.GuildRank.Rank > targ.GuildRank.Rank || pm == targ)))
+            public GuildTitlePrompt( Guild guild, PlayerMobile member )
+                : base( 32 )
             {
-                if (m_Member.GuildTitle == null || m_Member.GuildTitle.Length <= 0)
-                    pm.SendLocalizedMessage(1070746); // You don't have the permission to set that member's guild title.
-                else
-                    pm.SendLocalizedMessage(1063148); // You don't have permission to change this member's guild title.
-
-                return;
+                m_Guild = guild;
+                m_Member = member;
             }
 
-            string title = Utility.FixHtml(text.Trim());
-
-            if (title.Length > 20)
-                from.SendLocalizedMessage(501178); // That title is too long.
-            else if (!CheckProfanity(title))
-                from.SendLocalizedMessage(501179); // That title is disallowed.
-            else
+            public override void OnResponse( Mobile from, string text )
             {
-                targ.GuildTitle = Insensitive.Equals(title, "none") ? null : title;
+                PlayerMobile pm = from as PlayerMobile;
 
-                pm.SendLocalizedMessage(1063156, targ.Name); // The guild information for ~1_val~ has been updated.
+                if ( pm == null || m_Member == null )
+                    return;
+
+                if ( m_Guild == null || !IsMember( pm, m_Guild ) || !( pm.GuildRank.GetFlag( RankFlags.CanSetGuildTitle ) && ( pm.GuildRank.Rank > m_Member.GuildRank.Rank || pm == m_Member ) ) )
+                {
+                    if ( m_Member.GuildTitle == null || m_Member.GuildTitle.Length <= 0 )
+                        pm.SendLocalizedMessage( 1070746 ); // You don't have the permission to set that member's guild title.
+                    else
+                        pm.SendLocalizedMessage( 1063148 ); // You don't have permission to change this member's guild title.
+
+                    return;
+                }
+
+                string title = Utility.FixHtml(text.Trim());
+
+                if ( title.Length > 20 )
+                    from.SendLocalizedMessage( 501178 ); // That title is too long.
+                else if ( !CheckProfanity( title ) )
+                    from.SendLocalizedMessage( 501179 ); // That title is disallowed.
+                else
+                {
+                    m_Member.GuildTitle = Insensitive.Equals( title, "none" ) ? null : title;
+
+                    pm.SendLocalizedMessage( 1063156, m_Member.Name ); // The guild information for ~1_val~ has been updated.
+                }
             }
         }
     }

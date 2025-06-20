@@ -86,7 +86,7 @@ namespace Server.Items
             public Mobile From { get; }
 
             public ToggleExtinguishEntry(Mobile from, BaseWeapon weapon)
-                : base(weapon.GetSocket<SearingWeapon>().Extinguished ? 1151173 : 1151174, -1)
+                : base(weapon.GetSocket<SearingWeapon>().Extinguished ? 1151173 : 1151174, -1, weapon.GetSocket<SearingWeapon>().Extinguished ? 942 : 943)
             {
                 From = from;
                 Weapon = weapon;

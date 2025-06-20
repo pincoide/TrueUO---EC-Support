@@ -52,7 +52,7 @@ namespace Server.Items
             private readonly Mobile m_From;
 
             public StableEntry(DungeonHitchingPost post, Mobile from)
-                : base(6126, 12)
+                : base(6126, 12, 400)
             {
                 m_Post = post;
                 m_From = from;
@@ -70,7 +70,7 @@ namespace Server.Items
             private readonly Mobile m_From;
 
             public ClaimAllEntry(DungeonHitchingPost post, Mobile from)
-                : base(6127, 12)
+                : base(6127, 12, 401)
             {
                 m_Post = post;
                 m_From = from;

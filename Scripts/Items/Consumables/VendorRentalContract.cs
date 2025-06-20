@@ -228,7 +228,7 @@ namespace Server.Items
             private readonly VendorRentalContract m_Contract;
 			
             public ContractOptionEntry(VendorRentalContract contract)
-                : base(6209)
+                : base(6209, -1, 516)
             {
                 m_Contract = contract;
             }

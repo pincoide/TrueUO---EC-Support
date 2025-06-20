@@ -15,26 +15,28 @@ namespace Server.Mobiles
     {
         private readonly PlayerBarkeeper m_Barkeeper;
         private readonly int m_RumorIndex;
+        public override int MessageCliloc => 1062780; // Enter message text: (Leave blank to erase message)
 
-        public ChangeRumorMessagePrompt(PlayerBarkeeper barkeeper, int rumorIndex)
+        public ChangeRumorMessagePrompt( PlayerBarkeeper barkeeper, int rumorIndex )
+            : base( barkeeper, 10000 )
         {
             m_Barkeeper = barkeeper;
             m_RumorIndex = rumorIndex;
         }
 
-        public override void OnCancel(Mobile from)
+        public override void OnCancel( Mobile from )
         {
-            OnResponse(from, "");
+            OnResponse( from, "" );
         }
 
-        public override void OnResponse(Mobile from, string text)
+        public override void OnResponse( Mobile from, string text )
         {
-            if (text.Length > 130)
+            if ( text.Length > 130 )
             {
-                text = text.Substring(0, 130);
+                text = text.Substring( 0, 130 );
             }
 
-            m_Barkeeper.EndChangeRumor(from, m_RumorIndex, text);
+            m_Barkeeper.EndChangeRumor( from, m_RumorIndex, text );
         }
     }
 
@@ -42,34 +44,38 @@ namespace Server.Mobiles
     {
         private readonly PlayerBarkeeper m_Barkeeper;
         private readonly int m_RumorIndex;
+        public override int MessageCliloc => 1079267; // What keyword should a guest say to me to get this news?
 
-        public ChangeRumorKeywordPrompt(PlayerBarkeeper barkeeper, int rumorIndex)
+        public ChangeRumorKeywordPrompt( PlayerBarkeeper barkeeper, int rumorIndex )
+            : base( barkeeper, 10001 )
         {
             m_Barkeeper = barkeeper;
             m_RumorIndex = rumorIndex;
         }
 
-        public override void OnCancel(Mobile from)
+        public override void OnCancel( Mobile from )
         {
-            OnResponse(from, "");
+            OnResponse( from, "" );
         }
 
-        public override void OnResponse(Mobile from, string text)
+        public override void OnResponse( Mobile from, string text )
         {
-            if (text.Length > 130)
+            if ( text.Length > 130 )
             {
-                text = text.Substring(0, 130);
+                text = text.Substring( 0, 130 );
             }
 
-            m_Barkeeper.EndChangeKeyword(from, m_RumorIndex, text);
+            m_Barkeeper.EndChangeKeyword( from, m_RumorIndex, text );
         }
     }
 
     public class ChangeTipMessagePrompt : Prompt
     {
         private readonly PlayerBarkeeper m_Barkeeper;
+        public override int MessageCliloc => 1079268; // Say what you want me to tell guests when they give me a good tip.
 
-        public ChangeTipMessagePrompt(PlayerBarkeeper barkeeper)
+        public ChangeTipMessagePrompt( PlayerBarkeeper barkeeper )
+            : base( barkeeper, 10006 )
         {
             m_Barkeeper = barkeeper;
         }
@@ -135,7 +141,7 @@ namespace Server.Mobiles
         private readonly PlayerBarkeeper m_Barkeeper;
 
         public ManageBarkeeperEntry(Mobile from, PlayerBarkeeper barkeeper)
-            : base(6151, 12)
+            : base(6151, 12, 307)
         {
             m_From = from;
             m_Barkeeper = barkeeper;

@@ -17,6 +17,8 @@ namespace Server.Multis
 
             m_From.CloseGump(typeof(ConfirmDryDockGump));
 
+            TypeID = 999007;
+
             AddPage(0);
 
             AddBackground(0, 0, 220, 170, 5054);

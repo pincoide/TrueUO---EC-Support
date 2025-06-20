@@ -398,7 +398,7 @@ namespace Server.Mobiles
             private readonly BaseHire m_Hire;
 
             public HireEntry(Mobile from, BaseHire hire)
-                : base(6120, 3)
+                : base(6120, 3, 139)
             {
                 m_Hire = hire;
                 m_Mobile = from;

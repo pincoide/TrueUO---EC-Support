@@ -119,6 +119,8 @@ namespace Server.Guilds
         {
             base.PopulateGump();
 
+            TypeID = 727;
+
             AddHtmlLocalized(266, 43, 110, 26, 1062974, 0xF, false, false); // Guild Roster
         }
 

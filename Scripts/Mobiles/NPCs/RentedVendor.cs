@@ -234,7 +234,7 @@ namespace Server.Mobiles
         {
             private readonly RentedVendor m_Vendor;
             public ContractOptionsEntry(RentedVendor vendor)
-                : base(6209)
+                : base(6209, -1, 516)
             {
                 m_Vendor = vendor;
             }
@@ -267,7 +267,7 @@ namespace Server.Mobiles
         {
             private readonly RentedVendor m_Vendor;
             public CollectRentEntry(RentedVendor vendor)
-                : base(6212)
+                : base(6212, -1, 518)
             {
                 m_Vendor = vendor;
             }
@@ -297,7 +297,7 @@ namespace Server.Mobiles
         {
             private readonly RentedVendor m_Vendor;
             public TerminateContractEntry(RentedVendor vendor)
-                : base(6218)
+                : base(6218, -1, 607)
             {
                 m_Vendor = vendor;
             }
@@ -309,7 +309,6 @@ namespace Server.Mobiles
                 if (m_Vendor.Deleted || !from.CheckAlive() || !m_Vendor.IsLandlord(from))
                     return;
 
-                from.SendLocalizedMessage(1062503); // Enter the amount of gold you wish to offer the renter in exchange for immediate termination of this contract?
                 from.Prompt = new RefundOfferPrompt(m_Vendor);
             }
         }
@@ -317,7 +316,10 @@ namespace Server.Mobiles
         private class RefundOfferPrompt : Prompt
         {
             private readonly RentedVendor m_Vendor;
+            public override int MessageCliloc => 1062503; // Enter the amount of gold you wish to offer the renter in exchange for immediate termination of this contract?
+
             public RefundOfferPrompt(RentedVendor vendor)
+                : base( vendor, 59 )
             {
                 m_Vendor = vendor;
             }

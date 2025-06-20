@@ -205,7 +205,7 @@ namespace Server.Multis
             private readonly HouseTeleporterTile Item;
 
             public RechargeEntry(Mobile mobile, HouseTeleporterTile item)
-                : base(1076197, 2)
+                : base(1076197, 2, 383)
             {
                 Mobile = mobile;
                 Item = item;
@@ -289,7 +289,7 @@ namespace Server.Multis
             private readonly Item Item;
 
             public ChangeTypeEntry(Mobile mobile, Item item)
-                : base(1158896, 2)
+                : base(1158896, 2, 384)
             {
                 Mobile = mobile;
                 Item = item;

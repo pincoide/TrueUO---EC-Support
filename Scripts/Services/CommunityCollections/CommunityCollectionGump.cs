@@ -332,7 +332,6 @@ namespace Server.Gumps
             {
                 CollectionItem item = m_Collection.Donations[info.ButtonID - 300];
 
-                m_Owner.SendLocalizedMessage(1073178); // Please enter how much of that item you wish to donate:
                 m_Owner.Prompt = new InternalPrompt(m_Collection, item, m_Location);
             }
             else if (info.ButtonID >= 200 && m_Collection.Rewards != null && info.ButtonID - 200 < m_Collection.Rewards.Count && m_Section == Section.Rewards)
@@ -370,8 +369,10 @@ namespace Server.Gumps
             private readonly IComunityCollection m_Collection;
             private readonly CollectionItem m_Selected;
             private readonly Point3D m_Location;
+            public override int MessageCliloc => 1073178; // Please enter how much of that item you wish to donate:
 
             public InternalPrompt(IComunityCollection collection, CollectionItem selected, Point3D location)
+                : base( 62 )
             {
                 m_Collection = collection;
                 m_Selected = selected;

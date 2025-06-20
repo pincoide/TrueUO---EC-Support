@@ -2627,209 +2627,6 @@ namespace Server
             return true;
         }
 
-        #region Prompts
-        private class SimplePrompt : Prompt
-        {
-            private readonly PromptCallback m_Callback;
-            private readonly PromptCallback m_CancelCallback;
-            private readonly bool m_CallbackHandlesCancel;
-
-            public SimplePrompt(PromptCallback callback, PromptCallback cancelCallback)
-            {
-                m_Callback = callback;
-                m_CancelCallback = cancelCallback;
-            }
-
-            public SimplePrompt(PromptCallback callback, bool callbackHandlesCancel)
-            {
-                m_Callback = callback;
-                m_CallbackHandlesCancel = callbackHandlesCancel;
-            }
-
-            public SimplePrompt(PromptCallback callback)
-                : this(callback, false)
-            { }
-
-            public override void OnResponse(Mobile from, string text)
-            {
-                if (m_Callback != null)
-                {
-                    m_Callback(from, text);
-                }
-            }
-
-            public override void OnCancel(Mobile from)
-            {
-                if (m_CallbackHandlesCancel && m_Callback != null)
-                {
-                    m_Callback(from, "");
-                }
-                else if (m_CancelCallback != null)
-                {
-                    m_CancelCallback(from, "");
-                }
-            }
-        }
-
-        public Prompt BeginPrompt(PromptCallback callback, PromptCallback cancelCallback)
-        {
-            Prompt p = new SimplePrompt(callback, cancelCallback);
-
-            Prompt = p;
-            return p;
-        }
-
-        public Prompt BeginPrompt(PromptCallback callback, bool callbackHandlesCancel)
-        {
-            Prompt p = new SimplePrompt(callback, callbackHandlesCancel);
-
-            Prompt = p;
-            return p;
-        }
-
-        public Prompt BeginPrompt(PromptCallback callback)
-        {
-            return BeginPrompt(callback, false);
-        }
-
-        private class SimpleStatePrompt : Prompt
-        {
-            private readonly PromptStateCallback m_Callback;
-            private readonly PromptStateCallback m_CancelCallback;
-
-            private readonly bool m_CallbackHandlesCancel;
-
-            private readonly object m_State;
-
-            public SimpleStatePrompt(PromptStateCallback callback, PromptStateCallback cancelCallback, object state)
-            {
-                m_Callback = callback;
-                m_CancelCallback = cancelCallback;
-                m_State = state;
-            }
-
-            public SimpleStatePrompt(PromptStateCallback callback, bool callbackHandlesCancel, object state)
-            {
-                m_Callback = callback;
-                m_State = state;
-                m_CallbackHandlesCancel = callbackHandlesCancel;
-            }
-
-            public SimpleStatePrompt(PromptStateCallback callback, object state)
-                : this(callback, false, state)
-            { }
-
-            public override void OnResponse(Mobile from, string text)
-            {
-                if (m_Callback != null)
-                {
-                    m_Callback(from, text, m_State);
-                }
-            }
-
-            public override void OnCancel(Mobile from)
-            {
-                if (m_CallbackHandlesCancel && m_Callback != null)
-                {
-                    m_Callback(from, "", m_State);
-                }
-                else if (m_CancelCallback != null)
-                {
-                    m_CancelCallback(from, "", m_State);
-                }
-            }
-        }
-
-        public Prompt BeginPrompt(PromptStateCallback callback, PromptStateCallback cancelCallback, object state)
-        {
-            Prompt p = new SimpleStatePrompt(callback, cancelCallback, state);
-
-            Prompt = p;
-            return p;
-        }
-
-        public Prompt BeginPrompt(PromptStateCallback callback, bool callbackHandlesCancel, object state)
-        {
-            Prompt p = new SimpleStatePrompt(callback, callbackHandlesCancel, state);
-
-            Prompt = p;
-            return p;
-        }
-
-        public Prompt BeginPrompt(PromptStateCallback callback, object state)
-        {
-            return BeginPrompt(callback, false, state);
-        }
-
-        private class SimpleStatePrompt<T> : Prompt
-        {
-            private readonly PromptStateCallback<T> m_Callback;
-            private readonly PromptStateCallback<T> m_CancelCallback;
-
-            private readonly bool m_CallbackHandlesCancel;
-
-            private readonly T m_State;
-
-            public SimpleStatePrompt(PromptStateCallback<T> callback, PromptStateCallback<T> cancelCallback, T state)
-            {
-                m_Callback = callback;
-                m_CancelCallback = cancelCallback;
-                m_State = state;
-            }
-
-            public SimpleStatePrompt(PromptStateCallback<T> callback, bool callbackHandlesCancel, T state)
-            {
-                m_Callback = callback;
-                m_State = state;
-                m_CallbackHandlesCancel = callbackHandlesCancel;
-            }
-
-            public SimpleStatePrompt(PromptStateCallback<T> callback, T state)
-                : this(callback, false, state)
-            { }
-
-            public override void OnResponse(Mobile from, string text)
-            {
-                if (m_Callback != null)
-                {
-                    m_Callback(from, text, m_State);
-                }
-            }
-
-            public override void OnCancel(Mobile from)
-            {
-                if (m_CallbackHandlesCancel && m_Callback != null)
-                {
-                    m_Callback(from, "", m_State);
-                }
-                else if (m_CancelCallback != null)
-                {
-                    m_CancelCallback(from, "", m_State);
-                }
-            }
-        }
-
-        public Prompt BeginPrompt<T>(PromptStateCallback<T> callback, PromptStateCallback<T> cancelCallback, T state)
-        {
-            Prompt p = new SimpleStatePrompt<T>(callback, cancelCallback, state);
-
-            Prompt = p;
-            return p;
-        }
-
-        public Prompt BeginPrompt<T>(PromptStateCallback<T> callback, bool callbackHandlesCancel, T state)
-        {
-            Prompt p = new SimpleStatePrompt<T>(callback, callbackHandlesCancel, state);
-
-            Prompt = p;
-            return p;
-        }
-
-        public Prompt BeginPrompt<T>(PromptStateCallback<T> callback, T state)
-        {
-            return BeginPrompt(callback, false, state);
-        }
-
         public Prompt Prompt
         {
             get => m_Prompt;
@@ -2839,27 +2636,18 @@ namespace Server
                 Prompt newPrompt = value;
 
                 if (oldPrompt == newPrompt)
-                {
                     return;
-                }
 
                 m_Prompt = null;
 
                 if (oldPrompt != null && newPrompt != null)
-                {
                     oldPrompt.OnCancel(this);
-                }
 
                 m_Prompt = newPrompt;
 
-                if (newPrompt != null)
-                {
-                    newPrompt.SendTo(this);
-                    //Send(new UnicodePrompt(newPrompt));
-                }
+                newPrompt?.SendTo(this);
             }
         }
-        #endregion
 
         private bool InternalOnMove(Direction d)
         {
@@ -5986,7 +5774,7 @@ namespace Server
 
 			if (from == this && Backpack != null && CanSee(Backpack) && CheckAlive(false))
 			{
-				list.Add(new OpenBackpackEntry(this));
+				list.Add(new OpenBackpackOthersEntry( this));
 			}
 
 			if (Spawner != null)

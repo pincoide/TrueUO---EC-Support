@@ -1,4 +1,4 @@
-﻿using Server.ContextMenus;
+using Server.ContextMenus;
 using Server.Mobiles;
 
 namespace Server.Engines.Points
@@ -8,7 +8,7 @@ namespace Server.Engines.Points
         private readonly PlayerMobile m_From;
 
         public LoyaltyRating(PlayerMobile from)
-            : base(1049594)
+            : base(1049594, -1, 915)
         {
             m_From = from;
         }

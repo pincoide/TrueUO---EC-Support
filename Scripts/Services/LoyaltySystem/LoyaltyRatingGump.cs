@@ -10,6 +10,8 @@ namespace Server.Engines.Points
         public LoyaltyRatingGump(PlayerMobile pm)
             : base(120, 120)
         {
+            TypeID = 999060;
+
             AddImage(0, 0, 8000);
             AddImage(20, 37, 8001);
             AddImage(20, 107, 8002);
@@ -20,9 +22,15 @@ namespace Server.Engines.Points
 
             AddHtmlLocalized(0, 8, 345, 20, 1152187, false, false); // <center>Loyalty Ratings</center>
 
+			if ( CityLoyaltySystem.Enabled && CityLoyaltySystem.Cities != null )
+			{
+				AddHtmlLocalized(60, 395, 150, 20, 1152190, false, false);  // City Loyalty
+				AddButton(40, 400, 2103, 2104, 1, GumpButtonType.Reply, 0);
+			}
+
             int y = 40;
 
-            for (var index = 0; index < PointsSystem.Systems.Count; index++)
+            for (int index = 0; index < PointsSystem.Systems.Count; index++)
             {
                 PointsSystem sys = PointsSystem.Systems[index];
 
@@ -59,12 +67,6 @@ namespace Server.Engines.Points
 
             AddHtmlLocalized(50, 285, 150, 20, 1115129, pm.Fame.ToString(), 0, false, false); // Fame: ~1_AMT~
             AddHtmlLocalized(50, 305, 150, 20, 1115130, pm.Karma.ToString(), 0, false, false); // Karma: ~1_AMT~}
-
-            if (CityLoyaltySystem.Enabled && CityLoyaltySystem.Cities != null)
-            {
-                AddHtmlLocalized(60, 395, 150, 20, 1152190, false, false);  // City Loyalty
-                AddButton(40, 400, 2103, 2104, 1, GumpButtonType.Reply, 0);
-            }
         }
 
         public override void OnResponse(NetState state, RelayInfo info)

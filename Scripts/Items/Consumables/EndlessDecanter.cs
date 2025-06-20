@@ -149,7 +149,8 @@ namespace Server.Items
             private readonly Mobile m_From;
             private readonly EndlessDecanter m_Decanter;
 
-            public LinkEntry(Mobile from, EndlessDecanter decanter) : base(1115891, 0) // Link
+            public LinkEntry(Mobile from, EndlessDecanter decanter)
+                : base(1115891, 0, 324) // Link
             {
                 m_From = from;
                 m_Decanter = decanter;
@@ -210,7 +211,8 @@ namespace Server.Items
             private readonly Mobile m_From;
             private readonly EndlessDecanter m_Decanter;
 
-            public UnlinkEntry(Mobile from, EndlessDecanter decanter) : base(1115930, 0) // Unlink
+            public UnlinkEntry(Mobile from, EndlessDecanter decanter)
+                : base(1115930, 0, 325) // Unlink
             {
                 m_From = from;
                 m_Decanter = decanter;

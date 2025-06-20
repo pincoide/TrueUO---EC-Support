@@ -356,9 +356,10 @@ namespace Server.Items
 
         private class RenamePrompt : Prompt
         {
-            public override int MessageCliloc => 501665;
+            public override int MessageCliloc => 501665; // Enter a description for this key:
             private readonly Key m_Key;
             public RenamePrompt(Key key)
+                : base( key, 22 )
             {
                 m_Key = key;
             }
@@ -397,7 +398,7 @@ namespace Server.Items
 
                 if (targeted == m_Key)
                 {
-                    number = 501665; // Enter a description for this key.
+                    number = -1;
 
                     from.Prompt = new RenamePrompt(m_Key);
                 }

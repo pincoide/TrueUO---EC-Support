@@ -29,6 +29,11 @@ namespace Server.ContextMenus
 		/// </summary>
 		public int Number { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the return code to be used by the client as response to the server. If unspecified the index in the table will be used instead.
+        /// </summary>
+        public int ReturnCode { get; set; } = -1;
+
 		/// <summary>
 		///     Gets or sets the maximum range at which this entry may be used, in tiles. A value of -1 signifies no maximum range.
 		/// </summary>
@@ -63,21 +68,25 @@ namespace Server.ContextMenus
 			: this(number, -1)
 		{ }
 
-		/// <summary>
-		///     Instantiates a new ContextMenuEntry with a given <see cref="Number">localization number</see> (
-		///     <paramref
-		///         name="number" />
-		///     ) and <see cref="Range">maximum range</see> (<paramref name="range" />).
-		/// </summary>
-		/// <param name="number">
-		///     The localization number containing the name of this entry.
-		///     <seealso cref="Number" />
-		/// </param>
-		/// <param name="range">
-		///     The maximum range at which this entry can be used.
-		///     <seealso cref="Range" />
-		/// </param>
-		public ContextMenuEntry(int number, int range)
+        /// <summary>
+        ///     Instantiates a new ContextMenuEntry with a given <see cref="Number">localization number</see> (
+        ///     <paramref
+        ///         name="number" />
+        ///     ) and <see cref="Range">maximum range</see> (<paramref name="range" />).
+        /// </summary>
+        /// <param name="number">
+        ///     The localization number containing the name of this entry.
+        ///     <seealso cref="Number" />
+        /// </param>
+        /// <param name="range">
+        ///     The maximum range at which this entry can be used.
+        ///     <seealso cref="Range" />
+        /// </param>
+        /// <param name="returnCode">
+        ///     Return code to be used by the client as response to the server. If unspecified the index in the table will be used instead.
+        ///     <seealso cref="ReturnCode" />
+        /// </param>
+        public ContextMenuEntry(int number, int range, int returnCode = -1)
 		{
 			if (number <= 0x7FFF) // Legacy code support
 			{
@@ -91,6 +100,7 @@ namespace Server.ContextMenus
 			Range = range;
 			Enabled = true;
 			Color = 0xFFFF;
+			ReturnCode = returnCode;
 		}
 
 		~ContextMenuEntry()

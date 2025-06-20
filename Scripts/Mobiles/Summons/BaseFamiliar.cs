@@ -277,7 +277,7 @@ namespace Server.Mobiles
             private readonly BaseFamiliar m_Familiar;
 
             public ReleaseEntry(Mobile from, BaseFamiliar familiar)
-                : base(6118, 14)
+                : base(6118, 14, 138)
             {
                 m_From = from;
                 m_Familiar = familiar;

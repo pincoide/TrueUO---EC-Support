@@ -153,7 +153,6 @@ namespace Server.Engines.Craft
                     }
                 case 2: //Make Number
                     m_From.Prompt = new MakeNumberCraftPrompt(m_From, m_CraftSystem, m_CraftItem, m_Tool);
-                    m_From.SendLocalizedMessage(1112576); //Please type the amount you wish to create(1 - 100): <Escape to cancel>
                     break;
                 case 3: //Make Max
                     AutoCraftTimer.EndTimer(m_From);

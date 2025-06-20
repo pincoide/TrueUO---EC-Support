@@ -215,7 +215,7 @@ namespace Server.Engines.Quests.Matriarch
             private readonly BaseSolenMatriarch m_Matriarch;
             private readonly PlayerMobile m_From;
             public ProcessZoogiFungusEntry(BaseSolenMatriarch matriarch, PlayerMobile from)
-                : base(6184)
+                : base(6184, -1, 511)
             {
                 m_Matriarch = matriarch;
                 m_From = from;

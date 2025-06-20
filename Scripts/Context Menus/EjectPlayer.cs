@@ -17,7 +17,7 @@ namespace Server.ContextMenus
         private readonly BaseHouse _TargetHouse;
 
         public EjectPlayerEntry(Mobile from, Mobile target)
-            : base(6206, 12)
+            : base(6206, 12, 603)
         {
             _From = from;
             _Target = target;

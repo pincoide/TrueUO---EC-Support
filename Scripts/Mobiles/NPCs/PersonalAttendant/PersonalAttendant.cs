@@ -213,7 +213,7 @@ namespace Server.ContextMenus
     {
         private readonly PersonalAttendant m_Attendant;
         public AttendantFollowEntry(PersonalAttendant attendant)
-            : base(6108)
+            : base(6108, -1, 131)
         {
             m_Attendant = attendant;
         }
@@ -231,7 +231,7 @@ namespace Server.ContextMenus
     {
         private readonly PersonalAttendant m_Attendant;
         public AttendantStopEntry(PersonalAttendant attendant)
-            : base(6112)
+            : base(6112, -1, 135)
         {
             m_Attendant = attendant;
         }
@@ -249,7 +249,7 @@ namespace Server.ContextMenus
     {
         private readonly PersonalAttendant m_Attendant;
         public AttendantDismissEntry(PersonalAttendant attendant)
-            : base(6228)
+            : base(6228, -1, 623)
         {
             m_Attendant = attendant;
         }
@@ -266,8 +266,8 @@ namespace Server.ContextMenus
     public class AttendantUseEntry : ContextMenuEntry
     {
         private readonly PersonalAttendant m_Attendant;
-        public AttendantUseEntry(PersonalAttendant attendant, int title)
-            : base(title)
+        public AttendantUseEntry(PersonalAttendant attendant, int title, int returnCode = -1)
+            : base(title, -1, returnCode)
         {
             m_Attendant = attendant;
         }

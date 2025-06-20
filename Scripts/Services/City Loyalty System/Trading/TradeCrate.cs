@@ -252,7 +252,8 @@ namespace Server.Engines.CityLoyalty
             public TradeOrderCrate Crate { get; }
             public Mobile Player { get; }
 
-            public FillFromPackEntry(TradeOrderCrate crate, Mobile player) : base(1154908, 3) // Fill from pack
+            public FillFromPackEntry(TradeOrderCrate crate, Mobile player)
+                : base(1154908, 3, 354) // Fill from pack
             {
                 Crate = crate;
                 Player = player;
@@ -285,7 +286,8 @@ namespace Server.Engines.CityLoyalty
             public TradeOrderCrate Crate { get; }
             public Mobile Player { get; }
 
-            public CancelOrderEntry(TradeOrderCrate crate, Mobile player) : base(1151727, 3) // cancel trade order
+            public CancelOrderEntry(TradeOrderCrate crate, Mobile player)
+                : base(1151727, 3, 351) // cancel trade order
             {
                 Crate = crate;
                 Player = player;

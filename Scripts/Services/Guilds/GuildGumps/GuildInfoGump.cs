@@ -1,6 +1,9 @@
 using Server.Gumps;
+using Server.Items;
 using Server.Mobiles;
 using Server.Network;
+using Server.Prompts;
+using System;
 
 namespace Server.Guilds
 {
@@ -104,20 +107,15 @@ namespace Server.Guilds
                 case 4:
                     {
                         if (IsLeader(pm, guild))
-                        {
-                            pm.SendLocalizedMessage(1013071); // Enter the new guild charter (50 characters max):
+                            pm.Prompt = new GuildCharterPrompt( guild );
 
-                            pm.BeginPrompt(SetCharter_Callback, true);	//Have the same callback handle both canceling and deletion cause the 2nd callback would just get a text of ""
-                        }
                         break;
                     }
                 case 5:
                     {
                         if (IsLeader(pm, guild))
-                        {
-                            pm.SendLocalizedMessage(1013072); // Enter the new website for the guild (50 characters max):
-                            pm.BeginPrompt(SetWebsite_Callback, true);	//Have the same callback handle both canceling and deletion cause the 2nd callback would just get a text of ""
-                        }
+                            pm.Prompt = new GuildWebsitePrompt( guild );
+
                         break;
                     }
                 case 6:
@@ -174,37 +172,62 @@ namespace Server.Guilds
             }
         }
 
-        public void SetCharter_Callback(Mobile from, string text)
+        private class GuildCharterPrompt : Prompt
         {
-            if (!IsLeader(from, guild))
-                return;
+            public override int MessageCliloc => 1013071; // Enter the new guild charter(50 characters max ):
+            private readonly Guild m_Guild;
 
-            string charter = Utility.FixHtml(text.Trim());
 
-            if (charter.Length > 50)
+            public GuildCharterPrompt( Guild guild )
+                : base( 29 )
             {
-                from.SendLocalizedMessage(1070774, "50"); // Your guild charter cannot exceed ~1_val~ characters.
+                m_Guild = guild;
             }
-            else
+
+            public override void OnResponse( Mobile from, string text )
             {
-                guild.Charter = charter;
-                from.SendLocalizedMessage(1070775); // You submit a new guild charter.
+                if ( !IsLeader( from, m_Guild ) )
+                    return;
+
+                string charter = Utility.FixHtml(text.Trim());
+
+                if ( charter.Length > 50 )
+                {
+                    from.SendLocalizedMessage( 1070774, "50" ); // Your guild charter cannot exceed ~1_val~ characters.
+                }
+                else
+                {
+                    m_Guild.Charter = charter;
+                    from.SendLocalizedMessage( 1070775 ); // You submit a new guild charter.
+                }
             }
         }
 
-        public void SetWebsite_Callback(Mobile from, string text)
+        private class GuildWebsitePrompt : Prompt
         {
-            if (!IsLeader(from, guild))
-                return;
+            public override int MessageCliloc => 1013072; // Enter the new website/discord for the guild(50 characters max ):
+            private readonly Guild m_Guild;
 
-            string site = Utility.FixHtml(text.Trim());
-
-            if (site.Length > 50)
-                from.SendLocalizedMessage(1070777, "50"); // Your guild website cannot exceed ~1_val~ characters.
-            else
+            public GuildWebsitePrompt( Guild guild )
+                : base( 30 )
             {
-                guild.Website = site;
-                from.SendLocalizedMessage(1070778); // You submit a new guild website.
+                m_Guild = guild;
+            }
+
+            public override void OnResponse( Mobile from, string text )
+            {
+                if ( !IsLeader( from, m_Guild ) )
+                    return;
+
+                string site = Utility.FixHtml(text.Trim());
+
+                if ( site.Length > 50 )
+                    from.SendLocalizedMessage( 1070777, "50" ); // Your guild website cannot exceed ~1_val~ characters.
+                else
+                {
+                    m_Guild.Website = site;
+                    from.SendLocalizedMessage( 1070778 ); // You submit a new guild website.
+                }
             }
         }
     }

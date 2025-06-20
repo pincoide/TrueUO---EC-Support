@@ -10,6 +10,8 @@ namespace Server.Engines.VeteranRewards
         public RewardConfirmGump(Mobile from, RewardEntry entry)
             : base(0, 0)
         {
+            TypeID = 454;
+
             m_From = from;
             m_Entry = entry;
 

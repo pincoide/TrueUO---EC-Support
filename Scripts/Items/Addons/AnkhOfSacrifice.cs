@@ -81,7 +81,7 @@ namespace Server.Items
             private readonly Mobile m_Mobile;
             private readonly AnkhOfSacrificeAddon m_Ankh;
             public ResurrectEntry(Mobile mobile, AnkhOfSacrificeAddon ankh)
-                : base(6195, 2)
+                : base(6195, 2, 409)
             {
                 m_Mobile = mobile;
                 m_Ankh = ankh;
@@ -101,7 +101,7 @@ namespace Server.Items
             private readonly PlayerMobile m_Mobile;
             private readonly AnkhOfSacrificeAddon m_Ankh;
             public LockKarmaEntry(PlayerMobile mobile, AnkhOfSacrificeAddon ankh)
-                : base(mobile.KarmaLocked ? 6197 : 6196, 2)
+                : base(mobile.KarmaLocked ? 6197 : 6196, 2, mobile.KarmaLocked ? 411 : 410)
             {
                 m_Mobile = mobile;
                 m_Ankh = ankh;

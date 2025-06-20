@@ -100,7 +100,6 @@ namespace Server.AccountVault
             switch (info.ButtonID)
             {
                 case 102:
-                    User.SendLocalizedMessage(1155865); // Enter amount to deposit:
                     User.Prompt = new InternalPrompt(User, Vault);
                     break;
                 case 103:
@@ -114,7 +113,10 @@ namespace Server.AccountVault
             private PlayerMobile From { get; }
             private AccountVault Vault { get; }
 
+            public override int MessageCliloc => 1155865; // Enter amount to deposit:
+
             public InternalPrompt(PlayerMobile from, AccountVault vault)
+                : base( vault, 90129 )
             {
                 From = from;
                 Vault = vault;

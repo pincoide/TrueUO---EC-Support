@@ -403,7 +403,7 @@ namespace Server.Mobiles
         {
             private readonly CharacterStatue m_Statue;
             public DemolishEntry(CharacterStatue statue)
-                : base(6275, 2)
+                : base(6275, 2, 630)
             {
                 m_Statue = statue;
             }

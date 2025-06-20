@@ -257,7 +257,8 @@ namespace Server.Engines.NewMagincia
             private readonly WarehouseSuperintendent m_Mobile;
             private readonly StorageEntry m_Entry;
 
-            public ClaimStorageEntry(Mobile from, WarehouseSuperintendent mobile) : base(1150681, 3)
+            public ClaimStorageEntry(Mobile from, WarehouseSuperintendent mobile)
+                : base(1150681, 3, 1000)
             {
                 m_Mobile = mobile;
                 m_Entry = MaginciaBazaar.GetStorageEntry(from);
@@ -279,7 +280,8 @@ namespace Server.Engines.NewMagincia
 
         private class ChangeMatchBidEntry : ContextMenuEntry
         {
-            public ChangeMatchBidEntry(Mobile from) : base(1150587, 3)
+            public ChangeMatchBidEntry(Mobile from)
+                : base(1150587, 3)
             {
             }
 
@@ -287,8 +289,7 @@ namespace Server.Engines.NewMagincia
             {
                 Mobile from = Owner.From;
 
-                if (from != null)
-                    from.SendGump(new MatchBidGump(from, null));
+                from?.SendGump(new MatchBidGump(from, null));
             }
         }
 

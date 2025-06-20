@@ -939,7 +939,7 @@ namespace Server.Items
             private readonly BaseQuiver m_quiver;
 
             public RefillQuiverEntry(BaseQuiver bq)
-            : base(6230)
+            : base(6230, -1, 720)
             {
                 m_quiver = bq;
 

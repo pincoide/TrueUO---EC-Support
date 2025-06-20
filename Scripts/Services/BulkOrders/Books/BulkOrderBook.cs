@@ -269,7 +269,7 @@ namespace Server.Engines.BulkOrders
             private readonly Mobile m_From;
             private readonly BulkOrderBook m_Book;
             public NameBookEntry(Mobile from, BulkOrderBook book)
-                : base(6216)
+                : base(6216, -1, 515)
             {
                 m_From = from;
                 m_Book = book;
@@ -278,18 +278,16 @@ namespace Server.Engines.BulkOrders
             public override void OnClick()
             {
                 if (m_From.CheckAlive() && m_Book.IsChildOf(m_From.Backpack))
-                {
                     m_From.Prompt = new NameBookPrompt(m_Book);
-                    m_From.SendLocalizedMessage(1062479); // Type in the new name of the book:
-                }
             }
         }
 
         private class NameBookPrompt : Prompt
         {
-            public override int MessageCliloc => 1062479;
+            public override int MessageCliloc => 1062479; // Type in the new name of the book:
             private readonly BulkOrderBook m_Book;
             public NameBookPrompt(BulkOrderBook book)
+                :base(book, 52)
             {
                 m_Book = book;
             }

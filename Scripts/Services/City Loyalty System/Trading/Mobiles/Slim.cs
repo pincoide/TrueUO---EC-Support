@@ -57,7 +57,8 @@ namespace Server.Engines.CityLoyalty
             public SlimTheFence Slim { get; }
             public Mobile Player { get; }
 
-            public TurnInEntry(Mobile player, SlimTheFence slim) : base(1151729, 3) // Turn in a trade order
+            public TurnInEntry(Mobile player, SlimTheFence slim)
+                : base(1151729, 3, 352) // Turn in a trade order
             {
                 Player = player;
                 Slim = slim;

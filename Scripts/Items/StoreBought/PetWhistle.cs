@@ -93,7 +93,7 @@ namespace Server.Items
             private readonly Mobile m_From;
 
             public LinkBondedPetEntry(Mobile from, PetWhistle item)
-                : base(1159393, 6) // Link Bonded Pet
+                : base(1159393, 6, 960) // Link Bonded Pet
             {
                 m_From = from;
                 _Item = item;

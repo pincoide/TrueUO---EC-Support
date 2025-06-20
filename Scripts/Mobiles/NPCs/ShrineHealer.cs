@@ -33,7 +33,7 @@ namespace Server.Mobiles
             private readonly ShrineHealer m_Vendor;
 
             public ResurrectEntry(Mobile mobile, ShrineHealer vendor)
-                : base(6195, 2)
+                : base(6195, 2, 409)
             {
                 m_Mobile = mobile;
                 m_Vendor = vendor;
@@ -52,7 +52,7 @@ namespace Server.Mobiles
             private readonly PlayerMobile m_Mobile;
 
             public LockKarmaEntry(PlayerMobile mobile)
-                : base(mobile.KarmaLocked ? 6197 : 6196, 2)
+                : base(mobile.KarmaLocked ? 6197 : 6196, 2, mobile.KarmaLocked ? 411 : 410)
             {
                 m_Mobile = mobile;
             }
@@ -73,7 +73,7 @@ namespace Server.Mobiles
             private readonly Mobile m_Mobile;
 
             public TitheEntry(Mobile mobile)
-                : base(6198, 2)
+                : base(6198, 2, 412)
             {
                 m_Mobile = mobile;
 

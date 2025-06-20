@@ -92,7 +92,8 @@ namespace Server.Engines.CityLoyalty
             public TradeMinister Minister { get; }
             public Mobile Player { get; }
 
-            public TradeOrderEntry(Mobile player, TradeMinister minister) : base(1114453, 5) // Get Trade Order
+            public TradeOrderEntry(Mobile player, TradeMinister minister)
+                : base(1114453, 5, 350) // Get Trade Order
             {
                 Player = player;
                 Minister = minister;
@@ -119,7 +120,8 @@ namespace Server.Engines.CityLoyalty
             public TradeMinister Minister { get; }
             public Mobile Player { get; }
 
-            public TurnInEntry(Mobile player, TradeMinister minister) : base(1151729, 3) // Turn in a trade order
+            public TurnInEntry(Mobile player, TradeMinister minister)
+                : base(1151729, 3, 352) // Turn in a trade order
             {
                 Player = player;
                 Minister = minister;

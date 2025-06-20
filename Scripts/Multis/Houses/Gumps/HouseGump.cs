@@ -6,6 +6,7 @@ using Server.Prompts;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Linq;
 
 namespace Server.Gumps
 {
@@ -190,6 +191,8 @@ namespace Server.Gumps
             from.CloseGump(typeof(HouseGump));
             from.CloseGump(typeof(HouseSwapGump));
 
+            TypeID = 2533;
+
             bool isCombatRestricted = house.IsCombatRestricted(from);
 
             bool isOwner = house.IsOwner(from);
@@ -293,7 +296,7 @@ namespace Server.Gumps
                     }
                 case HouseGumpPage.Security:
                     {
-                        AddButtonLabeled(10, 130, GetButtonID(3, 0), 1011266, isCoOwner); // View Co-Owner List
+                        AddButtonLabeled( 10, 130, GetButtonID(3, 0), 1011266, isCoOwner); // View Co-Owner List
                         AddButtonLabeled(10, 150, GetButtonID(3, 1), 1011267, isOwner); // Add a Co-Owner
                         AddButtonLabeled(10, 170, GetButtonID(3, 2), 1018036, isOwner); // Remove a Co-Owner
                         AddButtonLabeled(10, 190, GetButtonID(3, 3), 1011268, isOwner); // Clear Co-Owner List
@@ -326,7 +329,7 @@ namespace Server.Gumps
                     }
                 case HouseGumpPage.Storage:
                     {
-                        AddHtmlLocalized(10, 130, 400, 20, 1060682, LabelColor, false, false); // <CENTER>HOUSE STORAGE SUMMARY</CENTER>
+                        AddHtmlLocalized( 10, 130, 400, 20, 1060682, LabelColor, false, false); // <CENTER>HOUSE STORAGE SUMMARY</CENTER>
 
                         int fromSecures, fromVendors, fromLockdowns, fromMovingCrate;
 
@@ -1611,9 +1614,10 @@ namespace Server.Prompts
 {
     public class RenamePrompt : Prompt
     {
-        public override int MessageCliloc => 501302; // What dost thou wish the sign to say?
+        public override int MessageCliloc => 1060767; // Enter the new name of your house.
         private readonly BaseHouse m_House;
         public RenamePrompt(BaseHouse house)
+            : base( house, 24 )
         {
             m_House = house;
         }

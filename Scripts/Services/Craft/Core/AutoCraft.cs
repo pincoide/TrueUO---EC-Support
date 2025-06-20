@@ -11,8 +11,10 @@ namespace Server.Engines.Craft
         private readonly CraftSystem _CraftSystem;
         private readonly CraftItem _CraftItem;
         private readonly ITool _Tool;
+        public override int MessageCliloc => 1112576; // Please type the amount you wish to create(1 - 100): <Escape to cancel>
 
         public MakeNumberCraftPrompt(Mobile from, CraftSystem system, CraftItem item, ITool tool)
+            :base( tool, 67 )
         {
             _From = from;
             _CraftSystem = system;

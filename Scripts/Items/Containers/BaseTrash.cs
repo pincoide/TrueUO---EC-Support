@@ -37,7 +37,7 @@ namespace Server.Items
         {
             private readonly Mobile m_Mobile;
             public AppraiseforCleanup(Mobile mobile)
-                : base(1151298, 2) //Appraise for Cleanup
+                : base(1151298, 2, 1001) //Appraise for Cleanup
             {
                 m_Mobile = mobile;
             }

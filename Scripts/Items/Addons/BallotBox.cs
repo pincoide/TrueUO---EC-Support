@@ -237,7 +237,6 @@ namespace Server.Items
                             {
                                 m_Box.ClearTopic();
 
-                                from.SendLocalizedMessage(500370, "", 0x35); // Enter a line of text for your ballot, and hit ENTER. Hit ESC after the last line is entered.
                                 from.Prompt = new TopicPrompt(m_Box);
                             }
 
@@ -298,8 +297,11 @@ namespace Server.Items
 
         private class TopicPrompt : Prompt
         {
+            public override int MessageCliloc => 500370;  // Enter a line of text for your ballot, and hit ENTER. Hit ESC after the last line is entered.
+
             private readonly BallotBox m_Box;
             public TopicPrompt(BallotBox box)
+                : base( box, 40 )
             {
                 m_Box = box;
             }

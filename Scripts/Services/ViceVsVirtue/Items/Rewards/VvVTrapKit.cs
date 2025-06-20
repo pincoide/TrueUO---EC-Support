@@ -203,7 +203,7 @@ namespace Server.Engines.VvV
             public Mobile Clicker { get; }
 
             public InternalEntry(VvVTrapKit deed, Mobile m)
-                : base(1155514, -1)
+                : base(1155514, -1, 358)
             {
                 Deed = deed;
                 Clicker = m;

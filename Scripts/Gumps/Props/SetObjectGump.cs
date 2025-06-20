@@ -233,6 +233,7 @@ namespace Server.Gumps
             private readonly ArrayList m_List;
 
             public InternalPrompt(PropertyInfo prop, Mobile mobile, object o, Stack stack, Type type, int page, ArrayList list)
+                : base( (IEntity)o , -4 )
             {
                 m_Property = prop;
                 m_Mobile = mobile;

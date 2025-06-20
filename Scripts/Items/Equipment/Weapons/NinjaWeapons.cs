@@ -335,8 +335,8 @@ namespace Server.Items
         {
             private readonly INinjaWeapon weapon;
 
-            public LoadEntry(INinjaWeapon wep, int entry)
-                : base(entry, 0)
+            public LoadEntry(INinjaWeapon wep, int entry, int returnCode = -1)
+                : base(entry, 0, returnCode)
             {
                 weapon = wep;
             }
@@ -354,8 +354,8 @@ namespace Server.Items
         {
             private readonly INinjaWeapon weapon;
 
-            public UnloadEntry(INinjaWeapon wep, int entry)
-                : base(entry, 0)
+            public UnloadEntry(INinjaWeapon wep, int entry, int returnCode = -1)
+                : base(entry, 0, returnCode)
             {
                 weapon = wep;
 

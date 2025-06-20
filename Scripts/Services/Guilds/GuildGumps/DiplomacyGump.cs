@@ -133,6 +133,8 @@ namespace Server.Guilds
         {
             base.PopulateGump();
 
+            TypeID = 729;
+
             AddHtmlLocalized(431, 43, 110, 26, 1062978, 0xF, false, false); // Diplomacy			
         }
 

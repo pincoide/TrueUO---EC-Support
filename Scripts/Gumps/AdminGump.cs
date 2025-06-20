@@ -3134,6 +3134,7 @@ namespace Server.Gumps
             private readonly Account m_Account;
 
             public AddCommentPrompt(Account acct)
+                : base( -1 )
             {
                 m_Account = acct;
             }
@@ -3158,6 +3159,7 @@ namespace Server.Gumps
             private readonly Account m_Account;
 
             public AddTagNamePrompt(Account acct)
+                : base( -2 )
             {
                 m_Account = acct;
             }
@@ -3180,6 +3182,7 @@ namespace Server.Gumps
             private readonly string m_Name;
 
             public AddTagValuePrompt(Account acct, string name)
+                : base( -3 )
             {
                 m_Account = acct;
                 m_Name = name;

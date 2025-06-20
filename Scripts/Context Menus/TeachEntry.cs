@@ -9,7 +9,7 @@ namespace Server.ContextMenus
         private readonly Mobile m_From;
 
         public TeachEntry(SkillName skill, BaseCreature m, Mobile from, bool enabled)
-            : base(6000 + (int)skill)
+            : base(6000 + (int)skill, -1, 200 + (int)skill)
         {
             m_Skill = skill;
             m_Mobile = m;

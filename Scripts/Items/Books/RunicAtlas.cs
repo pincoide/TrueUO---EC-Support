@@ -530,6 +530,7 @@ namespace Server.Items
             public RunicAtlas Atlas { get; }
 
             public InternalPrompt(RunicAtlas atlas)
+                : base( atlas, 44 )
             {
                 Atlas = atlas;
             }

@@ -17,6 +17,8 @@ namespace Server.Guilds
 
         public override void PopulateGump()
         {
+            TypeID = 726;
+
             AddPage(0);
 
             AddBackground(0, 0, 350, 170, 0x2422);

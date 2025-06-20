@@ -77,7 +77,8 @@ namespace Server.Mobiles
         {
             private readonly Mobile m_Mobile;
 
-            public ExodusArchZealotGumpEntry(Mobile from) : base(6146, 3)
+            public ExodusArchZealotGumpEntry(Mobile from)
+                : base(6146, 3, 303)
             {
                 m_Mobile = from;
             }

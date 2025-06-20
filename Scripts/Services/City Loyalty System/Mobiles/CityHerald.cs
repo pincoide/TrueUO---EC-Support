@@ -2,6 +2,7 @@ using Server.ContextMenus;
 using Server.Items;
 using Server.Mobiles;
 using Server.Network;
+using Server.Prompts;
 using System;
 using System.Collections.Generic;
 
@@ -107,7 +108,8 @@ namespace Server.Engines.CityLoyalty
             public CityHerald Herald { get; }
             public Mobile Player { get; }
 
-            public DonateGoldEntry(Mobile player, CityHerald herald) : base(1156237, 3) // Donate Gold
+            public DonateGoldEntry(Mobile player, CityHerald herald)
+                : base(1156237, 3, 120) // Donate Gold
             {
                 Player = player;
                 Herald = herald;
@@ -122,32 +124,7 @@ namespace Server.Engines.CityLoyalty
                     Player.SendLocalizedMessage(1079166); // You already have a text entry request pending.
                 }
                 else
-                {
-                    Player.SendLocalizedMessage(1155865); // Enter amount to deposit:
-                    Player.BeginPrompt(
-                        (from, text) =>
-                        {
-                            int amount = Utility.ToInt32(text);
-
-                            if (amount > 0)
-                            {
-                                if (Banker.Withdraw(from, amount, true))
-                                {
-                                    CityLoyaltySystem.GetCityInstance(Herald.City).AddToTreasury(from, amount, true);
-
-                                    Herald.SayTo(from, 1152926); // The City thanks you for your generosity!
-                                }
-                                else
-                                    from.SendLocalizedMessage(1155867); // The amount entered is invalid. Verify that there are sufficient funds to complete this transaction.
-                            }
-                            else
-                                from.SendLocalizedMessage(1155867); // The amount entered is invalid. Verify that there are sufficient funds to complete this transaction.
-                        },
-                        (from, text) =>
-                        {
-                            from.SendLocalizedMessage(1155867); // The amount entered is invalid. Verify that there are sufficient funds to complete this transaction.
-                        });
-                }
+                    Player.Prompt = new DonatePrompt( Herald );
             }
         }
 
@@ -208,6 +185,37 @@ namespace Server.Engines.CityLoyalty
                 Timer.Start();
             }
 
+        }
+
+        private class DonatePrompt : Prompt
+        {
+            public override int MessageCliloc => 1155865; // Enter amount to deposit:
+            private readonly CityHerald m_Herald;
+
+            public DonatePrompt( CityHerald herald )
+                : base( herald, 90133 )
+            {
+                m_Herald = herald;
+            }
+
+            public override void OnResponse( Mobile from, string text )
+            {
+                int amount = Utility.ToInt32(text);
+
+                if ( amount > 0 )
+                {
+                    if ( Banker.Withdraw( from, amount, true ) )
+                    {
+                        CityLoyaltySystem.GetCityInstance( m_Herald.City ).AddToTreasury( from, amount, true );
+
+                        m_Herald.SayTo( from, 1152926 ); // The City thanks you for your generosity!
+                    }
+                    else
+                        from.SendLocalizedMessage( 1155867 ); // The amount entered is invalid. Verify that there are sufficient funds to complete this transaction.
+                }
+                else
+                    from.SendLocalizedMessage( 1155867 ); // The amount entered is invalid. Verify that there are sufficient funds to complete this transaction.
+            }
         }
     }
 }

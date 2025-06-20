@@ -108,7 +108,7 @@ namespace Server.Items
             private readonly Mobile m_From;
 
             public StableEntry(HitchingPost post, Mobile from)
-                : base(6126, 12)
+                : base(6126, 12, 400)
             {
                 m_Post = post;
                 m_From = from;

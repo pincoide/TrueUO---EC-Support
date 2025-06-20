@@ -734,7 +734,7 @@ namespace Server.Services.TownCryer
         public TownCrier Cryer { get; }
 
         public UpdateEMEntry(TownCrier cryer)
-            : base(1158022, 3) // Update EM Town Crier
+            : base(1158022, 3, 378) // Update EM Town Crier
         {
             Cryer = cryer;
             Enabled = TownCryerSystem.ModeratorEntries.Count < TownCryerSystem.MaxEMEntries;
@@ -761,7 +761,7 @@ namespace Server.Services.TownCryer
         public TownCrier Cryer { get; }
 
         public UpdateCityEntry(TownCrier cryer)
-            : base(1158023, 3) // Update City Town Crier
+            : base(1158023, 3, 379) // Update City Town Crier
         {
             Cryer = cryer;
         }
@@ -792,7 +792,7 @@ namespace Server.Services.TownCryer
         public TownCrier Cryer { get; }
 
         public UpdateGuildEntry(Mobile from, TownCrier cryer)
-            : base(1158024, 3) // Update Guild Town Crier
+            : base(1158024, 3, 380) // Update Guild Town Crier
         {
             Cryer = cryer;
             Enabled = from.Guild != null && !TownCryerSystem.HasGuildEntry(from.Guild as Guild);

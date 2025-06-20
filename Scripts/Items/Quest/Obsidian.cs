@@ -190,7 +190,7 @@ namespace Server.Engines.Quests.Collector
         {
             private readonly Obsidian m_Obsidian;
             public DisassembleEntry(Obsidian obsidian)
-                : base(6142)
+                : base(6142, -1, 512)
             {
                 m_Obsidian = obsidian;
             }

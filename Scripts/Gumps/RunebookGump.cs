@@ -270,7 +270,7 @@ namespace Server.Gumps
             private readonly Runebook m_Book;
 
             public InternalPrompt(Runebook book)
-                : base(book)
+                : base(book, 44)
             {
                 m_Book = book;
             }
@@ -343,9 +343,8 @@ namespace Server.Gumps
             else if (buttonID == 1) // Rename book
             {
                 if (Book.CheckAccess(from) && Book.Movable)
-                {
                     from.Prompt = new InternalPrompt(Book);
-                }
+
                 else
                 {
                     Book.Openers.Remove(from);

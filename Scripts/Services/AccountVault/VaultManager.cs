@@ -109,7 +109,7 @@ namespace Server.AccountVault
             public VaultManager Manager { get; }
 
             public OpenVaultEntry(VaultManager manager)
-                : base(1157734, 8)
+                : base(1157734, 8, 373)
             {
                 Manager = manager;
             }
@@ -146,7 +146,7 @@ namespace Server.AccountVault
             public VaultManager Manager { get; }
 
             public RentVaultEntry(VaultManager manager)
-                 : base(1157733, 8)
+                 : base(1157733, 8, 372)
             {
                 Manager = manager;
             }
@@ -172,7 +172,7 @@ namespace Server.AccountVault
             public VaultManager Manager { get; }
 
             public ClaimVaultEntry(VaultManager manager)
-                : base(1157735, 8)
+                : base(1158021, 8, 374)
             {
                 Manager = manager;
             }
@@ -207,7 +207,7 @@ namespace Server.AccountVault
             public AccountVault Vault { get; }
 
             public VaultActionsEntry(VaultManager manager, AccountVault vault)
-                : base(1157978, 8)
+                : base(1157978, 8, 376)
             {
                 Manager = manager;
                 Vault = vault;
@@ -227,7 +227,7 @@ namespace Server.AccountVault
             public VaultManager Manager { get; }
 
             public VaultLocationsEntry(VaultManager manager)
-                : base(1158143, 8)
+                : base(1158143, 8, 381)
             {
                 Manager = manager;
             }

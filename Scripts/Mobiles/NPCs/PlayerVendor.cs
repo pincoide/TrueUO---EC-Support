@@ -215,7 +215,7 @@ namespace Server.Mobiles
             private readonly Item m_Item;
 
             public BuyEntry(Item item)
-                : base(6103)
+                : base(6103, -1, 608)
             {
                 m_Item = item;
             }
@@ -857,7 +857,6 @@ namespace Server.Mobiles
             if (HoldGold > 0)
             {
                 SayTo(to, 1079008, HoldGold.ToString()); // How much of the ~1_gold~ gold that I'm holding would you like?
-                to.SendLocalizedMessage(1079007); // Enter the amount of gold you wish to withdraw(ESC = CANCEL):
 
                 to.Prompt = new CollectGoldPrompt(this);
             }
@@ -869,16 +868,16 @@ namespace Server.Mobiles
 
         public void DepositeGold(Mobile to)
         {
-            to.SendLocalizedMessage(1156105); // Enter the amount of gold you wish to deposit (ESC = CANCEL):
-
             to.Prompt = new DepositGoldPrompt(this);
         }
 
         private class DepositGoldPrompt : Prompt
         {
             private readonly PlayerVendor m_Vendor;
+            public override int MessageCliloc => 1156105; // Enter the amount of gold you wish to deposit (ESC = CANCEL):
 
             public DepositGoldPrompt(PlayerVendor vendor)
+                : base( vendor, 69 )
             {
                 m_Vendor = vendor;
             }
@@ -983,15 +982,11 @@ namespace Server.Mobiles
 
         public void Rename(Mobile from)
         {
-            from.SendLocalizedMessage(1062494); // Enter a new name for your vendor (20 characters max):
-
             from.Prompt = new VendorNamePrompt(this);
         }
 
         public void RenameShop(Mobile from)
         {
-            from.SendLocalizedMessage(1062433); // Enter a new name for your shop (20 chars max):
-
             from.Prompt = new ShopNamePrompt(this);
         }
 
@@ -1243,7 +1238,6 @@ namespace Server.Mobiles
                 else
                     name = "#" + item.LabelNumber;
 
-                from.SendLocalizedMessage(1043303, name); // Type in a price and description for ~1_ITEM~ (ESC=not for sale)
                 from.Prompt = new VendorPricePrompt(this, vi);
             }
         }
@@ -1253,7 +1247,7 @@ namespace Server.Mobiles
             private readonly PlayerVendor m_Vendor;
 
             public ReturnVendorEntry(PlayerVendor vendor)
-                : base(6214)
+                : base(6214, -1, 605)
             {
                 m_Vendor = vendor;
             }
@@ -1289,8 +1283,10 @@ namespace Server.Mobiles
         {
             private readonly PlayerVendor m_Vendor;
             private readonly VendorItem m_VI;
+            public override int MessageCliloc => 1043303; // Type in a price and description for ~1_ITEM ~: (ESC = not-for-sale)
 
             public VendorPricePrompt(PlayerVendor vendor, VendorItem vi)
+                : base( vi.Item, 26 )
             {
                 m_Vendor = vendor;
                 m_VI = vi;
@@ -1390,8 +1386,10 @@ namespace Server.Mobiles
         private class CollectGoldPrompt : Prompt
         {
             private readonly PlayerVendor m_Vendor;
+            public override int MessageCliloc => 1079007; // Enter the amount of gold you wish to withdraw(ESC = CANCEL):
 
             public CollectGoldPrompt(PlayerVendor vendor)
+                : base( vendor, 60 )
             {
                 m_Vendor = vendor;
             }
@@ -1435,8 +1433,10 @@ namespace Server.Mobiles
         private class VendorNamePrompt : Prompt
         {
             private readonly PlayerVendor m_Vendor;
-
+            public override int MessageCliloc => 1062494; // Enter a new name for your vendor (20 characters max):
+            
             public VendorNamePrompt(PlayerVendor vendor)
+                : base( vendor, 42 )
             {
                 m_Vendor = vendor;
             }
@@ -1465,7 +1465,10 @@ namespace Server.Mobiles
         private class ShopNamePrompt : Prompt
         {
             private readonly PlayerVendor m_Vendor;
+            public override int MessageCliloc => 1062433; // Enter a new name for your shop (20 chars max):
+
             public ShopNamePrompt(PlayerVendor vendor)
+                : base( vendor, 57 )
             {
                 m_Vendor = vendor;
             }

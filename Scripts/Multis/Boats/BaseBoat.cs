@@ -2136,9 +2136,6 @@ namespace Server.Multis
                 return;
             }
 
-            if (TillerMan != null)
-                TillerManSay(502580); // What dost thou wish to name thy ship?
-
             from.Prompt = new RenameBoatPrompt(this);
         }
 
@@ -3517,7 +3514,7 @@ namespace Server.Multis
         private Mobile From { get; }
 
         public DryDockEntry(BaseBoat boat, Mobile from)
-            : base(1116520, 12)
+            : base(1116520, 12, 937)
         {
             From = from;
             Boat = boat;
@@ -3538,7 +3535,7 @@ namespace Server.Multis
         private Mobile From { get; }
 
         public RenameShipEntry(BaseBoat boat, Mobile from)
-            : base(1111680, 3)
+            : base(1115557, 3, 936)
         {
             Boat = boat;
             From = from;

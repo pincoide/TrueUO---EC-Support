@@ -3,8 +3,10 @@ using Server.ContextMenus;
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Multis;
+using Server.Prompts;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Runtime.CompilerServices;
 
 namespace Server.Items
 {
@@ -250,8 +252,8 @@ namespace Server.Items
         public WallSafe Safe { get; set; }
         public PlayerMobile User { get; set; }
 
-        public WallSafeGump(PlayerMobile pm, WallSafe safe)
-            : base(50, 50)
+        public WallSafeGump( PlayerMobile pm, WallSafe safe )
+            : base( 50, 50 )
         {
             User = pm;
             Safe = safe;
@@ -261,131 +263,174 @@ namespace Server.Items
 
         public void AddGumpLayout()
         {
-            AddBackground(0, 0, 400, 500, 83);
+            AddBackground( 0, 0, 400, 500, 83 );
 
-            AddHtmlLocalized(0, 10, 400, 16, 1113302, "#1155860", 0xFFFF, false, false);
+            AddHtmlLocalized( 0, 10, 400, 16, 1113302, "#1155860", 0xFFFF, false, false );
 
             int secureAmount = 0;
 
-            if (User.Account is Account acct)
+            if ( User.Account is Account acct )
             {
-                secureAmount = acct.GetSecureAccountAmount(User);
+                secureAmount = acct.GetSecureAccountAmount( User );
             }
 
-            AddHtmlLocalized(20, 35, 380, 16, 1155859, Safe.HoldAmount.ToString("N0", CultureInfo.GetCultureInfo("en-US")), 0xFFFF, false, false); // Gold Deposited: ~1_AMOUNT~
-            AddHtmlLocalized(20, 65, 380, 16, 1155864, $"{User.Name}\t{secureAmount.ToString("N0", CultureInfo.GetCultureInfo("en-US"))}", 0xFFFF, false, false); // ~1_NAME~'s Secure Account: ~2_AMOUNT~
+            AddHtmlLocalized( 20, 35, 380, 16, 1155859, Safe.HoldAmount.ToString( "N0", CultureInfo.GetCultureInfo( "en-US" ) ), 0xFFFF, false, false ); // Gold Deposited: ~1_AMOUNT~
+            AddHtmlLocalized( 20, 65, 380, 16, 1155864, $"{User.Name}\t{secureAmount.ToString( "N0", CultureInfo.GetCultureInfo( "en-US" ) )}", 0xFFFF, false, false ); // ~1_NAME~'s Secure Account: ~2_AMOUNT~
 
-            AddHtmlLocalized(20, 125, 100, 16, 1155861, 0xFFFF, false, false); // Deposit
-            AddButton(75, 125, 4005, 4006, 1, GumpButtonType.Reply, 0);
+            AddHtmlLocalized( 20, 125, 100, 16, 1155861, 0xFFFF, false, false ); // Deposit
+            AddButton( 75, 125, 4005, 4006, 1, GumpButtonType.Reply, 0 );
 
-            AddHtmlLocalized(220, 125, 100, 16, 1155862, 0xFFFF, false, false); // Withdraw
-            AddButton(300, 125, 4005, 4006, 2, GumpButtonType.Reply, 0);
+            AddHtmlLocalized( 220, 125, 100, 16, 1155862, 0xFFFF, false, false ); // Withdraw
+            AddButton( 300, 125, 4005, 4006, 2, GumpButtonType.Reply, 0 );
 
-            AddHtmlLocalized(20, 165, 200, 16, 1155863, 0xFFFF, false, false); // Sale Transactions:
+            AddHtmlLocalized( 20, 165, 200, 16, 1155863, 0xFFFF, false, false ); // Sale Transactions:
 
-            if (Safe.History != null && Safe.History.Count > 0)
+            if ( Safe.History != null && Safe.History.Count > 0 )
             {
                 int y = 195;
-                for (int i = Safe.History.Count - 1; i >= 0 && i < WallSafe.HistoryMax; i--)
+                for ( int i = Safe.History.Count - 1; i >= 0 && i < WallSafe.HistoryMax; i-- )
                 {
-                    AddHtml(20, y, 380, 16, Safe.History[i], false, false);
+                    AddHtml( 20, y, 380, 16, Safe.History[i], false, false );
                     y += 20;
                 }
             }
         }
 
-        public override void OnResponse(Network.NetState state, RelayInfo info)
+        public override void OnResponse( Network.NetState state, RelayInfo info )
         {
             Account account = User.Account as Account;
             int secureAmount = 0;
 
-            if (account != null)
-                secureAmount = account.GetSecureAccountAmount(User);
+            if ( account != null )
+                secureAmount = account.GetSecureAccountAmount( User );
 
-            switch (info.ButtonID)
+            switch ( info.ButtonID )
             {
                 case 1:
-                    User.SendLocalizedMessage(1155865); // Enter amount to deposit:
-                    User.BeginPrompt(
-                    (from, text, acct) =>
-                    {
-                        int v = 0;
+                    User.Prompt = new DepositToSecureAccountPrompt( account, Safe );
 
-                        if (text != null && !string.IsNullOrEmpty(text))
-                        {
-                            v = Utility.ToInt32(text);
-
-                            if (v <= 0 || v > secureAmount)
-                                from.SendLocalizedMessage(1155867); // The amount entered is invalid. Verify that there are sufficient funds to complete this transaction.
-                            else if (acct != null)
-                            {
-                                int left = WallSafe.MaxGold - Safe.HoldAmount;
-
-                                if (v > left)
-                                {
-                                    Safe.HoldAmount = WallSafe.MaxGold;
-                                    acct.WithdrawFromSecure(User, left);
-                                    Safe.AddHistory($"<basefont color=green>{User.Name} +{left.ToString("N0", CultureInfo.GetCultureInfo("en-US"))}");
-                                }
-                                else
-                                {
-                                    Safe.HoldAmount += v;
-                                    acct.WithdrawFromSecure(User, v);
-                                    Safe.AddHistory($"<basefont color=green>{User.Name} +{v.ToString("N0", CultureInfo.GetCultureInfo("en-US"))}");
-                                }
-
-                                from.SendGump(new WallSafeGump(User, Safe));
-                            }
-                        }
-                        else
-                            from.SendLocalizedMessage(1155867); // The amount entered is invalid. Verify that there are sufficient funds to complete this transaction.
-                    },
-                    (from, text, acct) =>
-                    {
-                        from.SendGump(new WallSafeGump(User, Safe));
-                    }, account);
                     break;
                 case 2:
-                    User.SendLocalizedMessage(1155866); // Enter amount to withdraw:
-                    User.BeginPrompt(
-                    (from, text, acct) =>
+                    User.Prompt = new WithdrawFromSecureAccountPrompt( account, Safe );
+
+                    break;
+            }
+        }
+
+        private class DepositToSecureAccountPrompt : Prompt
+        {
+            public override int MessageCliloc => 1155865; // Enter amount to deposit:
+            private readonly Account m_Account;
+            private readonly WallSafe m_Safe;
+
+            public DepositToSecureAccountPrompt( Account account, WallSafe safe )
+                : base( safe, 90129 )
+            {
+                m_Account = account;
+                m_Safe = safe;
+            }
+
+            public override void OnResponse( Mobile from, string text )
+            {
+                int secureAmount = 0;
+
+                if ( m_Account != null )
+                    secureAmount = m_Account.GetSecureAccountAmount( from );
+
+                int v = 0;
+
+                if ( text != null && !string.IsNullOrEmpty( text ) )
+                {
+                    v = Utility.ToInt32( text );
+
+                    if ( v <= 0 || v > secureAmount )
+                        from.SendLocalizedMessage( 1155867 ); // The amount entered is invalid. Verify that there are sufficient funds to complete this transaction.
+                    else if ( m_Account != null )
                     {
-                        int v = 0;
+                        int left = WallSafe.MaxGold - m_Safe.HoldAmount;
 
-                        if (text != null && !string.IsNullOrEmpty(text))
+                        if ( v > left )
                         {
-                            v = Utility.ToInt32(text);
-
-                            if (v <= 0 || v > Safe.HoldAmount)
-                                from.SendLocalizedMessage(1155867); // The amount entered is invalid. Verify that there are sufficient funds to complete this transaction.
-                            else if (acct != null)
-                            {
-                                int left = Account.MaxSecureAmount - secureAmount;
-
-                                if (v > left)
-                                {
-                                    acct.DepositToSecure(User, left);
-                                    Safe.HoldAmount -= left;
-                                    Safe.AddHistory($"<basefont color=red>{User.Name} -{left.ToString("N0", CultureInfo.GetCultureInfo("en-US"))}");
-                                }
-                                else
-                                {
-                                    acct.DepositToSecure(User, v);
-                                    Safe.HoldAmount -= v;
-                                    Safe.AddHistory($"<basefont color=red>{User.Name} -{v.ToString("N0", CultureInfo.GetCultureInfo("en-US"))}");
-                                }
-
-                                from.SendGump(new WallSafeGump(User, Safe));
-                            }
+                            m_Safe.HoldAmount = WallSafe.MaxGold;
+                            m_Account.WithdrawFromSecure( from, left );
+                            m_Safe.AddHistory( $"<basefont color=green>{from.Name} +{left.ToString( "N0", CultureInfo.GetCultureInfo( "en-US" ) )}" );
                         }
                         else
-                            from.SendLocalizedMessage(1155867); // The amount entered is invalid. Verify that there are sufficient funds to complete this transaction.
-                    },
-                    (from, text, acct) =>
+                        {
+                            m_Safe.HoldAmount += v;
+                            m_Account.WithdrawFromSecure( from, v );
+                            m_Safe.AddHistory( $"<basefont color=green>{from.Name} +{v.ToString( "N0", CultureInfo.GetCultureInfo( "en-US" ) )}" );
+                        }
+
+                        from.SendGump( new WallSafeGump( (PlayerMobile)from , m_Safe ) );
+                    }
+                }
+                else
+                    from.SendLocalizedMessage( 1155867 ); // The amount entered is invalid. Verify that there are sufficient funds to complete this transaction.
+            }
+
+            public override void OnCancel( Mobile from )
+            {
+                from.SendGump( new WallSafeGump( (PlayerMobile)from , m_Safe ) );
+            }
+        }
+
+        private class WithdrawFromSecureAccountPrompt : Prompt
+        {
+            public override int MessageCliloc => 1155866; // Enter amount to withdraw:
+            private readonly Account m_Account;
+            private readonly WallSafe m_Safe;
+
+
+            public WithdrawFromSecureAccountPrompt( Account account, WallSafe safe )
+                : base( safe, 90130 )
+            {
+                m_Account = account;
+                m_Safe = safe;
+            }
+
+            public override void OnResponse( Mobile from, string text )
+            {
+                int secureAmount = 0;
+
+                if ( m_Account != null )
+                    secureAmount = m_Account.GetSecureAccountAmount( from );
+
+                int v = 0;
+
+                if ( text != null && !string.IsNullOrEmpty( text ) )
+                {
+                    v = Utility.ToInt32( text );
+
+                    if ( v <= 0 || v > m_Safe.HoldAmount )
+                        from.SendLocalizedMessage( 1155867 ); // The amount entered is invalid. Verify that there are sufficient funds to complete this transaction.
+                    else if ( m_Account != null )
                     {
-                        from.SendGump(new WallSafeGump(User, Safe));
-                    }, account);
-                    break;
+                        int left = Account.MaxSecureAmount - secureAmount;
+
+                        if ( v > left )
+                        {
+                            m_Account.DepositToSecure( from, left );
+                            m_Safe.HoldAmount -= left;
+                            m_Safe.AddHistory( $"<basefont color=red>{from.Name} -{left.ToString( "N0", CultureInfo.GetCultureInfo( "en-US" ) )}" );
+                        }
+                        else
+                        {
+                            m_Account.DepositToSecure( from, v );
+                            m_Safe.HoldAmount -= v;
+                            m_Safe.AddHistory( $"<basefont color=red>{from.Name} -{v.ToString( "N0", CultureInfo.GetCultureInfo( "en-US" ) )}" );
+                        }
+
+                        from.SendGump( new WallSafeGump( (PlayerMobile)from, m_Safe ) );
+                    }
+                }
+                else
+                    from.SendLocalizedMessage( 1155867 ); // The amount entered is invalid. Verify that there are sufficient funds to complete this transaction.
+            }
+
+            public override void OnCancel( Mobile from )
+            {
+                from.SendGump( new WallSafeGump( (PlayerMobile)from, m_Safe ) );
             }
         }
     }

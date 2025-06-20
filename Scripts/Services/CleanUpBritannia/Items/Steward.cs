@@ -227,7 +227,7 @@ namespace Server.Mobiles
             private readonly Mobile _Mannequin;
 
             public RenameEntry(Mobile from, Mobile m)
-                : base(1155203, 2)
+                : base( 1115557, 2, 606 )
             {
                 _From = from;
                 _Mannequin = m;
@@ -235,17 +235,17 @@ namespace Server.Mobiles
 
             public override void OnClick()
             {
-                _From.SendLocalizedMessage(1062494); // Enter a new name for your vendor (20 characters max):
                 _From.Prompt = new RenamePrompt(_Mannequin);
             }
         }
 
         private class RenamePrompt : Prompt
         {
-            public override int MessageCliloc => 1062433;
+            public override int MessageCliloc => 1062494; // Enter a new name for your vendor (20 characters max):
             private readonly Mobile _Mannequin;
 
             public RenamePrompt(Mobile m)
+                : base( m, 42 )
             {
                 _Mannequin = m;
             }
@@ -270,7 +270,7 @@ namespace Server.Mobiles
             private readonly Mobile _Mannequin;
 
             public SetKeywordEntry(Mobile from, Mobile m)
-                : base(1153254, 4)
+                : base(1153254, 4, 1005)
             {
                 _From = from;
                 _Mannequin = m;
@@ -278,16 +278,17 @@ namespace Server.Mobiles
 
             public override void OnClick()
             {
-                _From.SendLocalizedMessage(1153259); // Enter a new keyword for your npc (20 characters max):
                 _From.Prompt = new SetKeywordPrompt(_Mannequin);
             }
         }
 
         private class SetKeywordPrompt : Prompt
         {
+            public override int MessageCliloc => 1153259; // Enter a new keyword for your npc (20 characters max):
             private readonly Mobile _Mannequin;
 
             public SetKeywordPrompt(Mobile m)
+                : base( m, 36 )
             {
                 _Mannequin = m;
             }
@@ -330,7 +331,7 @@ namespace Server.Mobiles
             private readonly Mobile _Mannequin;
 
             public OpenBackpackEntry(Mobile from, Mobile m)
-                : base(3006145, 4)
+                : base(6145, 4, 508)
             {
                 _From = from;
                 _Mannequin = m;
@@ -349,7 +350,7 @@ namespace Server.Mobiles
             private readonly Mobile _Mannequin;
 
             public CustomizeBodyEntry(Mobile from, Mobile m)
-                : base(1151585, 4)
+                : base(1151585, 4, 1003)
             {
                 _From = from;
                 _Mannequin = m;
@@ -367,7 +368,7 @@ namespace Server.Mobiles
             private readonly Steward _Mannequin;
 
             public SwitchClothesEntry(Mobile from, Steward m)
-                : base(1151606, 2)
+                : base(1151606, 2, 1007)
             {
                 _From = from;
                 _Mannequin = m;
@@ -473,7 +474,7 @@ namespace Server.Mobiles
             private readonly Mobile _Mannequin;
 
             public RotateEntry(Mobile from, Mobile m)
-                : base(1151586, 2)
+                : base(1151586, 2, 1004)
             {
                 _From = from;
                 _Mannequin = m;
@@ -499,7 +500,7 @@ namespace Server.Mobiles
             private readonly Mobile _Mannequin;
 
             public RedeedEntry(Mobile from, Mobile m)
-                : base(1151601, 2)
+                : base(1151601, 2, 1006)
             {
                 _From = from;
                 _Mannequin = m;

@@ -236,7 +236,6 @@ namespace Server.Gumps
 
         protected override void SetPricePerRental(Mobile from)
         {
-            from.SendLocalizedMessage(1062365); // Please enter the amount of gold that should be charged for this contract (ESC to cancel):
             from.Prompt = new PricePerRentalPrompt(m_Contract);
         }
 
@@ -258,9 +257,10 @@ namespace Server.Gumps
 
         private class PricePerRentalPrompt : Prompt
         {
-            public override int MessageCliloc => 1062365;
+            public override int MessageCliloc => 1062365; // Please enter the amount of gold that should be charged for this contract (ESC to cancel):
             private readonly VendorRentalContract m_Contract;
             public PricePerRentalPrompt(VendorRentalContract contract)
+                : base( contract, 53 )
             {
                 m_Contract = contract;
             }
@@ -473,16 +473,15 @@ namespace Server.Gumps
 
         protected override void SetRenewalPrice(Mobile from)
         {
-            from.SendLocalizedMessage(1062500); // Enter contract renewal price:
-
             from.Prompt = new ContractRenewalPricePrompt(m_Vendor);
         }
 
         private class ContractRenewalPricePrompt : Prompt
         {
-            public override int MessageCliloc => 1062500;
+            public override int MessageCliloc => 1062500; // Enter contract renewal price:
             private readonly RentedVendor m_Vendor;
             public ContractRenewalPricePrompt(RentedVendor vendor)
+                : base( vendor, 58 )
             {
                 m_Vendor = vendor;
             }

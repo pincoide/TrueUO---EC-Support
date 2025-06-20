@@ -285,7 +285,7 @@ namespace Server.Engines.Despise
             private readonly Mobile m_From;
             private readonly WispOrb m_Orb;
 
-            public ConscriptEntry(Mobile from, WispOrb orb) : base(1153285, -1) // Conscript
+            public ConscriptEntry(Mobile from, WispOrb orb) : base(1153285, -1, 337) // Conscript
             {
                 m_From = from;
                 m_Orb = orb;
@@ -316,7 +316,7 @@ namespace Server.Engines.Despise
             private readonly Mobile m_From;
             private readonly WispOrb m_Orb;
 
-            public ReleaseEntry(Mobile from, WispOrb orb) : base(1153284, -1) // Release
+            public ReleaseEntry(Mobile from, WispOrb orb) : base(1153284, -1, 336) // Release
             {
                 m_From = from;
                 m_Orb = orb;

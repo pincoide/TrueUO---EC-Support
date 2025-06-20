@@ -136,7 +136,7 @@ namespace Server.Items
         {
             private readonly FishBowl m_Bowl;
             public RemoveCreature(FishBowl bowl)
-                : base(6242, 3)// Remove creature
+                : base(6242, 3, 741)// Remove creature
             {
                 m_Bowl = bowl;
             }

@@ -74,7 +74,7 @@ namespace Server.Mobiles
             private readonly Mobile m_Vendor;
 
             public ShipRecallRuneEntry(Mobile from, Mobile vendor)
-                : base(1149570, 6)
+                : base(1149570, 6, 940)
             {
                 m_From = from;
                 m_Vendor = vendor;
@@ -157,7 +157,7 @@ namespace Server.Mobiles
             private readonly Mobile m_Vendor;
 
             public AbandonShipEntry(Mobile from, Mobile vendor)
-                : base(1150110, 6)
+                : base(1150110, 6, 939)
             {
                 m_From = from;
                 m_Vendor = vendor;

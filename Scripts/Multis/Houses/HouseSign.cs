@@ -177,7 +177,7 @@ namespace Server.Multis
             private readonly HouseSign m_Sign;
 
             public VendorsEntry(HouseSign sign)
-                : base(6211)
+                : base(6211, -1, 517)
             {
                 m_Sign = sign;
             }
@@ -205,7 +205,7 @@ namespace Server.Multis
             private readonly HouseSign m_Sign;
 
             public ReclaimVendorInventoryEntry(HouseSign sign)
-                : base(6213)
+                : base(6213, -1, 519)
             {
                 m_Sign = sign;
             }

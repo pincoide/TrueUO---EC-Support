@@ -144,7 +144,7 @@ namespace Server.Items
                 {
                     from.SendLocalizedMessage(1150421, "#1150424"); // The ~1_NAME~ rejects that item.
                 }
-                else if (!from.BankBox.TryDropItem(from, item, false))
+                else if (!from.BankBox.TryDropItem(from, item, false)) // this must always be the last check
                 {
                     from.SendLocalizedMessage(1054110); // Your bank box is full.
                 }
@@ -156,21 +156,22 @@ namespace Server.Items
             }
         }
 
-        public override void GetContextMenuEntries(Mobile from, List<ContextMenuEntry> list)
+        public override void GetContextMenuEntries( Mobile from, List<ContextMenuEntry> list )
         {
-            base.GetContextMenuEntries(from, list);
+            base.GetContextMenuEntries( from, list );
 
-            if (from.CheckAlive())
-                list.Add(new UseChestEntry(this, CheckAccessible(from, this)));
+            if ( from.CheckAlive() )
+                list.Add( new UseChestEntry( this, CheckAccessible( from, this ) ) );
 
-            SetSecureLevelEntry.AddTo(from, this, list);
+            SetSecureLevelEntry.AddTo( from, this, list );
         }
 
         private class UseChestEntry : ContextMenuEntry
         {
             private readonly ChestOfSending m_Chest;
 
-            public UseChestEntry(ChestOfSending chest, bool enabled) : base(1150419, 2)
+            public UseChestEntry(ChestOfSending chest, bool enabled)
+                : base(1150419, 2, 10) // TODO: verify return code
             {
                 m_Chest = chest;
 

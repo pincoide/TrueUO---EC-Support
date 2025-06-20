@@ -1056,7 +1056,7 @@ namespace Server.Engines.Quests
     public class SelectQuestItem : ContextMenuEntry
     {
         public SelectQuestItem()
-            : base(6169)
+            : base(6169, -1, 801)
         {
         }
 

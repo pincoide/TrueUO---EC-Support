@@ -554,6 +554,7 @@ namespace Server.Misc
         private readonly ShardPoller m_Poller;
         private readonly ShardPollOption m_Option;
         public ShardPollPrompt(ShardPoller poller, ShardPollOption opt)
+            : base( -6 )
         {
             m_Poller = poller;
             m_Option = opt;
