@@ -223,7 +223,7 @@ namespace Server.Items
             private readonly BaseWeapon m_Weapon; // BaseArmor, BaseWeapon or BaseClothing
 
             public UnBlessEntry(Mobile from, BaseWeapon weapon)
-                : base(6208, -1)
+                : base(6208, -1, 514)
             {
                 m_From = from;
                 m_Weapon = weapon;

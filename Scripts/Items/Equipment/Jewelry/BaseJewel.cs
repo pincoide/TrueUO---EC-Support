@@ -112,7 +112,7 @@ namespace Server.Items
             private readonly BaseJewel m_Item;
 
             public UnBlessEntry(Mobile from, BaseJewel item)
-                : base(6208, -1)
+                : base(6208, -1, 514)
             {
                 m_From = from;
                 m_Item = item;

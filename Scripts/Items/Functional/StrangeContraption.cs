@@ -40,7 +40,7 @@ namespace Server.Items
             private readonly AddonComponent m_Component;
 
             public DeviceEntry(Mobile mobile, AddonComponent c)
-                : base(3006190, 16) // Appraise for Cleanup
+                : base(3006190, 16, 1001) // Appraise for Cleanup
             {
                 m_Mobile = mobile;
                 m_Component = c;

@@ -82,7 +82,8 @@ namespace Server.Engines.HuntsmasterChallenge
         {
             private readonly HuntMaster m_HuntMaster;
 
-            public BuyPermitEntry(HuntMaster master) : base(1155701, 3) // Get Hunting Permit
+            public BuyPermitEntry(HuntMaster master)
+                : base(1155701, 3, 359) // Get Hunting Permit
             {
                 m_HuntMaster = master;
             }
@@ -115,7 +116,7 @@ namespace Server.Engines.HuntsmasterChallenge
             private readonly Mobile m_Vendor;
 
             public ClaimEntry(PlayerMobile mobile, Mobile vendor)
-                : base(1155593, 2)
+                : base(1155593, 2, 348)
             {
                 m_Mobile = mobile;
                 m_Vendor = vendor;

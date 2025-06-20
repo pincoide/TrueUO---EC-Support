@@ -390,7 +390,7 @@ namespace Server.Engines.Quests
             private readonly BaseEscort m_Mobile;
 
             public AbandonEscortEntry(BaseEscort m)
-                : base(6102, 3)
+                : base(6102, 3, 102)
             {
                 m_Mobile = m;
             }

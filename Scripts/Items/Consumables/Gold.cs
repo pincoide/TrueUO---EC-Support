@@ -1,4 +1,5 @@
 using Server.Accounting;
+using Server.Gumps;
 
 namespace Server.Items
 {
@@ -75,6 +76,10 @@ namespace Server.Items
             }
 
             owner.SendLocalizedMessage(1042763, Amount.ToString("#,0"));
+
+            // update the bank gump if it is open
+            if ( owner.HasGump( typeof( BankerGump ) ) )
+                owner.FindGump<BankerGump>()?.Refresh();
 
             Delete();
 

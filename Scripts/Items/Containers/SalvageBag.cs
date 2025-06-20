@@ -327,7 +327,7 @@ namespace Server.Items
             private readonly SalvageBag m_Bag;
 
             public SalvageAllEntry(SalvageBag bag, bool enabled)
-                : base(6276)
+                : base(6276, -1, 910)
             {
                 m_Bag = bag;
 
@@ -352,7 +352,7 @@ namespace Server.Items
             private readonly SalvageBag m_Bag;
 
             public SalvageIngotsEntry(SalvageBag bag, bool enabled)
-                : base(6277)
+                : base(6277, -1, 911)
             {
                 m_Bag = bag;
 
@@ -377,7 +377,7 @@ namespace Server.Items
             private readonly SalvageBag m_Bag;
 
             public SalvageClothEntry(SalvageBag bag, bool enabled)
-                : base(6278)
+                : base(6278, -1, 912)
             {
                 m_Bag = bag;
 

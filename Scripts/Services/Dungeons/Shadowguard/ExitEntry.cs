@@ -7,7 +7,7 @@ namespace Server.Engines.Shadowguard
         private readonly Mobile _From;
 
         public ExitEntry(Mobile from)
-            : base(1156287, -1) // Exit Shadowguard
+            : base(1156287, -1, 362) // Exit Shadowguard
         {
             _From = from;
         }
@@ -32,7 +32,7 @@ namespace Server.Engines.Shadowguard
         private readonly ShadowguardController _Controller;
 
         public ExitQueueEntry(Mobile from, ShadowguardController controller)
-            : base(1156247, 12) // Exit Shadowguard Queues
+            : base(1156247, 12, 361) // Exit Shadowguard Queues
         {
             _From = from;
             _Controller = controller;

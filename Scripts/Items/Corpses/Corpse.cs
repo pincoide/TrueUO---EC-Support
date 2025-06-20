@@ -905,7 +905,7 @@ namespace Server.Items
         private class OpenCorpseEntry : ContextMenuEntry
         {
             public OpenCorpseEntry()
-                : base(6215, 2)
+                : base(6215, 2, 513)
             { }
 
             public override void OnClick()

@@ -1371,7 +1371,7 @@ namespace Server.Items
             private readonly TreasureMap m_Map;
 
             public DecodeMapEntry(TreasureMap map)
-                : base(6147, 2)
+                : base(6147, 2, 10)
             {
                 m_Map = map;
             }
@@ -1390,7 +1390,7 @@ namespace Server.Items
             private readonly TreasureMap m_Map;
 
             public OpenMapEntry(TreasureMap map)
-                : base(6150, 2)
+                : base(6150, 2, 10)
             {
                 m_Map = map;
             }
@@ -1409,7 +1409,7 @@ namespace Server.Items
             private readonly TreasureMap m_Map;
 
             public DigEntry(TreasureMap map, bool enabled)
-                : base(6148, 2)
+                : base(6148, 2, 305)
             {
                 m_Map = map;
 

@@ -212,7 +212,11 @@ namespace Server.Items
             private readonly BasePlayerBB m_Board;
             private readonly bool m_Greeting;
 
+            public override int MessageCliloc => m_Greeting ? 1062404: 1062397; // Enter new greeting( this will always be the first post ) :
+
+
             public PostPrompt(int page, BaseHouse house, BasePlayerBB board, bool greeting)
+                : base( board, greeting ? 56 : 54 )
             {
                 m_Page = page;
                 m_House = house;
@@ -287,12 +291,13 @@ namespace Server.Items
 
         public class SetTitlePrompt : Prompt
         {
-            public override int MessageCliloc => 1062402;
+            public override int MessageCliloc => 1062402; // Enter new title:
             private readonly int m_Page;
             private readonly BaseHouse m_House;
             private readonly BasePlayerBB m_Board;
 
             public SetTitlePrompt(int page, BaseHouse house, BasePlayerBB board)
+                : base( board, 55 )
             {
                 m_Page = page;
                 m_House = house;
@@ -513,27 +518,20 @@ namespace Server.Items
                 case 1: // Post message
                     {
                         from.Prompt = new BasePlayerBB.PostPrompt(page, house, board, false);
-                        from.SendLocalizedMessage(1062397); // Please enter your message:
 
                         break;
                     }
                 case 2: // Set title
                     {
                         if (board.CanPostGreeting(house, from))
-                        {
                             from.Prompt = new BasePlayerBB.SetTitlePrompt(page, house, board);
-                            from.SendLocalizedMessage(1062402); // Enter new title:
-                        }
 
                         break;
                     }
                 case 3: // Post greeting
                     {
                         if (board.CanPostGreeting(house, from))
-                        {
                             from.Prompt = new BasePlayerBB.PostPrompt(page, house, board, true);
-                            from.SendLocalizedMessage(1062404); // Enter new greeting (this will always be the first post):
-                        }
 
                         break;
                     }

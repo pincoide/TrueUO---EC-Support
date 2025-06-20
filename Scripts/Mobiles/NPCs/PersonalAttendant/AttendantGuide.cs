@@ -664,7 +664,7 @@ namespace Server.Mobiles
         public override void AddCustomContextEntries(Mobile from, List<ContextMenuEntry> list)
         {
             if (from.Alive && IsOwner(from))
-                list.Add(new AttendantUseEntry(this, 6249));
+                list.Add(new AttendantUseEntry(this, 6249, 626)); // find a shop
 
             base.AddCustomContextEntries(from, list);
         }

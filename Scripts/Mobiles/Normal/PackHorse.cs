@@ -139,7 +139,7 @@ namespace Server.Mobiles
         private readonly Mobile m_From;
 
         public PackAnimalBackpackEntry(BaseCreature animal, Mobile from)
-            : base(6145, 3)
+            : base(6145, 3, 508)
         {
             m_Animal = animal;
             m_From = from;

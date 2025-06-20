@@ -1,9 +1,11 @@
 using Server.Gumps;
 using Server.Items;
+using Server.Mobiles;
 using Server.Network;
 using Server.Prompts;
 using Server.Targeting;
 using System;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Server.Engines.Distillation
 {
@@ -154,8 +156,8 @@ namespace Server.Engines.Distillation
                     m_Context.Mark = !m_Context.Mark;
                     break;
                 case 6: // Label
-                    from.Prompt = new LabelPrompt(m_Context);
-                    from.SendLocalizedMessage(1150734); // Please enter the text with which you wish to label the liquor that you will distill. You many enter up to 15 characters. Leave the text area blank to remove any existing text.
+                    from.SendGump( new DistillationNameGump( m_Context ) );
+
                     return;
                 case 7: // Execute Distillation
                     from.Target = new DistillationTarget(from, m_Context, m_Def);
@@ -195,44 +197,62 @@ namespace Server.Engines.Distillation
             from.SendGump(new DistillationGump(from));
         }
 
-        private class LabelPrompt : Prompt
+        public class DistillationNameGump : Gump
         {
             private readonly DistillationContext m_Context;
 
-            public LabelPrompt(DistillationContext context)
+            public DistillationNameGump( DistillationContext context )
+                : base( 0, 0 )
             {
                 m_Context = context;
+
+                TypeID = 9150;
+
+                AddBackground( 50, 50, 400, 300, 0xA28 );
+
+                AddPage( 0 );
+
+                AddHtmlLocalized( 50, 70, 400, 20, 1150706, false, false );
+                AddHtmlLocalized( 75, 95, 350, 145, 1151908, "@20", 0, true, false );
+                AddButton( 125, 300, 0x81A, 2074, 1, GumpButtonType.Reply, 0 );
+                AddButton( 320, 300, 0x819, 2073, 0, GumpButtonType.Reply, 0 );
+
+                AddImageTiled( 75, 245, 350, 40, 3504 );
+                AddImageTiled( 75, 245, 350, 2, 9157 );
+                AddImageTiled( 75, 245, 2, 40, 9155 );
+                AddImageTiled( 75, 285, 350, 2, 9157 );
+                AddImageTiled( 425, 245, 2, 42, 9155 );
+
+                AddTextEntryIntern( 78, 246, 343, 37, 0x0, 0, 0 );
             }
 
-            public override void OnResponse(Mobile from, string text)
+            public override void OnResponse( NetState state, RelayInfo info )
             {
-                if (string.IsNullOrEmpty(text))
-                {
-                    m_Context.Label = null;
-                }
-                else
-                {
-                    text = text.Trim();
+                Mobile from = state.Mobile;
 
-                    if (text.Length > 15 || !Guilds.BaseGuildGump.CheckProfanity(text))
-                    {
-                        from.SendLocalizedMessage(1150315); // That text is unacceptable.
-                    }
+                int index = info.ButtonID;
+
+                string text = info.GetTextEntry( 0 ).Text;
+
+                if ( index == 1 )
+                {
+                    if ( string.IsNullOrEmpty( text ) )
+                        m_Context.Label = null;
+
                     else
                     {
-                        m_Context.Label = text;
-                    }
+                        text = text.Trim();
+
+                        if ( text.Length > 15 || !Guilds.BaseGuildGump.CheckProfanity( text ) )
+                            from.SendLocalizedMessage( 1150315 ); // That text is unacceptable.
+
+                        else
+                            m_Context.Label = text;
+                    } 
                 }
 
-                from.SendGump(new DistillationGump(from));
+                from.SendGump( new DistillationGump( from ) );
             }
-
-            public override void OnCancel(Mobile from)
-            {
-                from.SendGump(new DistillationGump(from));
-            }
-
-
         }
 
         public class DistillationTarget : Target

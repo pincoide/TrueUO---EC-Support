@@ -517,7 +517,7 @@ namespace Server.Mobiles
             private readonly AnimalTrainer m_Trainer;
 
             public StableEntry(AnimalTrainer trainer, Mobile from)
-                : base(6126, 12)
+                : base(6126, 12, 400)
             {
                 m_Trainer = trainer;
                 m_From = from;
@@ -598,7 +598,7 @@ namespace Server.Mobiles
             private readonly AnimalTrainer m_Trainer;
 
             public ClaimAllEntry(AnimalTrainer trainer, Mobile from)
-                : base(6127, 12)
+                : base(6127, 12, 401)
             {
                 m_Trainer = trainer;
                 m_From = from;

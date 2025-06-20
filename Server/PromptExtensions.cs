@@ -53,7 +53,7 @@ namespace Server.Network
 			AddHtmlLocalized(264, 80, 200, 24, 1062524, false, false);
 			AddHtmlLocalized(120, 108, 420, 48, 1062638, false, false);
 			AddBackground(100, 148, 440, 200, 0xDAC);
-			AddTextEntryIntern(120, 168, 400, 200, 0x0, 44, 0);
+			AddTextEntryIntern(120, 168, 400, 200, 0x0, prompt.TypeId, 0);
 			AddButton(175, 355, 0x81A, 0x81B, 1, GumpButtonType.Reply, 0);
 			AddButton(405, 355, 0x819, 0x818, 0, GumpButtonType.Reply, 0);
 		}

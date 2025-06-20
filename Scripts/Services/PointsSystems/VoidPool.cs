@@ -50,7 +50,7 @@ namespace Server.Engines.Points
         private readonly VoidPoolController m_Controller;
 
         public VoidPoolInfo(Mobile from, VoidPoolController controller)
-            : base(1152531, -1) // The Void Pool
+            : base(1152531, -1, 1010) // The Void Pool
         {
             m_From = from;
             m_Controller = controller;

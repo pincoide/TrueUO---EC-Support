@@ -149,6 +149,7 @@ namespace Server.Items
             private readonly List<RecipeScrollDefinition> m_List;
 
             public SetPricePrompt(RecipeBook book, RecipeScrollDefinition recipe, int page, List<RecipeScrollDefinition> list)
+                : base( book, 51 )
             {
                 m_Book = book;
                 m_Recipe = recipe;

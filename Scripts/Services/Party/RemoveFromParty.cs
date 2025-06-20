@@ -8,7 +8,7 @@ namespace Server.ContextMenus
         private readonly Mobile _Target;
 
         public RemoveFromPartyEntry(Mobile from, Mobile target)
-            : base(0198, 12)
+            : base(0198, 12, 811)
         {
             _From = from;
             _Target = target;

@@ -28,7 +28,7 @@ namespace Server.Items
         {
             if (m.InRange(GetWorldLocation(), 2))
             {
-                m.Prompt = new DoomPlaquePrompt();
+                m.Prompt = new DoomPlaquePrompt(this);
             }
         }
 
@@ -78,7 +78,12 @@ namespace Server.Items
 
         private class DoomPlaquePrompt : Prompt
         {
-            public override int MessageCliloc => 1155661;
+            public override int MessageCliloc => 1155661; // Enter the characters you wish to push...
+
+            public DoomPlaquePrompt( DoomPlaque plaque )
+                : base( plaque )
+            {
+            }
 
             public override void OnResponse(Mobile from, string text)
             {

@@ -224,7 +224,7 @@ namespace Server.Items
             public Mobile Clicker { get; set; }
 
             public OpenMapEntry(Mobile from, AuctionMap map)
-                : base(3006150, -1) // Open Map
+                : base(3006150, -1, 10) // Open Map
             {
                 VendorMap = map;
                 Clicker = from;
@@ -242,7 +242,7 @@ namespace Server.Items
             public Mobile Clicker { get; set; }
 
             public TeleportEntry(Mobile from, AuctionMap map)
-                : base(1154558, -1) // Teleport To Vendor
+                : base(1154558, -1, 1015) // Teleport To Vendor
             {
                 VendorMap = map;
                 Clicker = from;

@@ -107,13 +107,13 @@ namespace Server.Items
             {
                 if (Pet == null)
                 {
-                    list.Add(new BallEntry(LinkPet, 6180));
+                    list.Add(new BallEntry(LinkPet, 6180, 10));
                 }
                 else
                 {
-                    list.Add(new BallEntry(CastSummonPet, 6181));
-                    list.Add(new BallEntry(UpdatePetName, 6183));
-                    list.Add(new BallEntry(UnlinkPet, 6182));
+                    list.Add(new BallEntry(CastSummonPet, 6181, 10));
+                    list.Add(new BallEntry(UpdatePetName, 6183, 510) );
+                    list.Add(new BallEntry(UnlinkPet, 6182, 509) );
                 }
             }
         }
@@ -301,8 +301,8 @@ namespace Server.Items
         private class BallEntry : ContextMenuEntry
         {
             private readonly BallCallback m_Callback;
-            public BallEntry(BallCallback callback, int number)
-                : base(number, 2)
+            public BallEntry(BallCallback callback, int number, int returnCode = -1)
+                : base(number, 2, returnCode)
             {
                 m_Callback = callback;
             }

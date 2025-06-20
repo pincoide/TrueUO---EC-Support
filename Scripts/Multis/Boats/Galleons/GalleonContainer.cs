@@ -38,7 +38,7 @@ namespace Server.Items
             private readonly BaseGalleon m_Galleon;
 
             public RelocateContainerEntry(GalleonContainer container, BaseGalleon galleon)
-                : base(1061829, 3)
+                : base(1159158, 3, 1022)
             {
                 m_Galleon = galleon;
                 m_Container = container;

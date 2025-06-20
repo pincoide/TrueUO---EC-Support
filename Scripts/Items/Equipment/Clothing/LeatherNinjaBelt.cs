@@ -114,8 +114,8 @@ namespace Server.Items
 
             if (IsChildOf(from))
             {
-                list.Add(new NinjaWeapon.LoadEntry(this, 6222));
-                list.Add(new NinjaWeapon.UnloadEntry(this, 6223));
+                list.Add(new NinjaWeapon.LoadEntry(this, 6222, 701));
+                list.Add(new NinjaWeapon.UnloadEntry(this, 6223, 702));
             }
         }
 

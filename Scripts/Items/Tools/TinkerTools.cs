@@ -52,7 +52,7 @@ namespace Server.Items
             private readonly BaseTool _Tool;
 
             public ToggleRepairContextMenuEntry(Mobile from, BaseTool tool)
-                : base(1157040) // Toggle Repair Mode
+                : base(1157040, -1, 1019) // Toggle Repair Mode
             {
                 _From = from;
                 _Tool = tool;
@@ -122,7 +122,7 @@ namespace Server.Items
             private readonly BaseTool _Tool;
 
             public ToggleRepairContextMenuEntry(Mobile from, BaseTool tool)
-                : base(1157040) // Toggle Repair Mode
+                : base(1157040, -1, 1019) // Toggle Repair Mode
             {
                 _From = from;
                 _Tool = tool;

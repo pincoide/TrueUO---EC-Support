@@ -1968,7 +1968,7 @@ namespace Server.Multis
         private readonly BaseGalleon m_Galleon;
 
         public ShipAccessEntry(Mobile from, Mobile clicker, BaseGalleon galleon)
-            : base(1116566, 15)
+            : base(1116566, 15, 933)
         {
             m_From = from;
             m_Clicker = clicker;

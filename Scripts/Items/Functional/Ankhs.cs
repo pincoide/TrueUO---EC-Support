@@ -43,7 +43,7 @@ namespace Server.Items
             private readonly Mobile m_Mobile;
             private readonly Item m_Item;
             public ResurrectEntry(Mobile mobile, Item item)
-                : base(6195, ResurrectRange)
+                : base(6195, ResurrectRange, 409)
             {
                 m_Mobile = mobile;
                 m_Item = item;
@@ -61,7 +61,7 @@ namespace Server.Items
         {
             private readonly PlayerMobile m_Mobile;
             public LockKarmaEntry(PlayerMobile mobile)
-                : base(mobile.KarmaLocked ? 6197 : 6196, LockRange)
+                : base(mobile.KarmaLocked ? 6197 : 6196, LockRange, mobile.KarmaLocked ? 411 : 410)
             {
                 m_Mobile = mobile;
             }
@@ -81,7 +81,7 @@ namespace Server.Items
         {
             private readonly Mobile m_Mobile;
             public TitheEntry(Mobile mobile)
-                : base(6198, TitheRange)
+                : base(6198, TitheRange, 412)
             {
                 m_Mobile = mobile;
 

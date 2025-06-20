@@ -514,7 +514,7 @@ namespace Server.Items
             private readonly RecipeBook m_Book;
 
             public NameBookEntry(Mobile from, RecipeBook book)
-                : base(6216)
+                : base(6216, -1, 515)
             {
                 m_From = from;
                 m_Book = book;
@@ -536,6 +536,7 @@ namespace Server.Items
             private readonly RecipeBook m_Book;
 
             public NameBookPrompt(RecipeBook book)
+                : base( book, 52 )
             {
                 m_Book = book;
             }

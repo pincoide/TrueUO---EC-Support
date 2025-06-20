@@ -147,7 +147,7 @@ namespace Server.Items
             private readonly Mobile m_From;
             private readonly BaseBoard m_Board;
             public DefaultEntry(Mobile from, BaseBoard board)
-                : base(6162, from.AccessLevel >= AccessLevel.GameMaster ? -1 : 1)
+                : base(6162, from.AccessLevel >= AccessLevel.GameMaster ? -1 : 1, 12) // reset game
             {
                 m_From = from;
                 m_Board = board;

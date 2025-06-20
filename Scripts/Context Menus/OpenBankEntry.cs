@@ -9,7 +9,7 @@ namespace Server.ContextMenus
         private readonly Mobile m_Banker;
 
         public OpenBankEntry(Mobile banker)
-            : base(6105, 12)
+            : base(6105, 12, 120)
         {
             m_Banker = banker;
         }

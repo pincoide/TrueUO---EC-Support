@@ -35,7 +35,7 @@ namespace Server.Mobiles
         public override void AddCustomContextEntries(Mobile from, List<ContextMenuEntry> list)
         {
             if (from.Alive && IsOwner(from))
-                list.Add(new AttendantUseEntry(this, 6244));
+                list.Add(new AttendantUseEntry(this, 6244, 625)); // roll dice
 
             base.AddCustomContextEntries(from, list);
         }

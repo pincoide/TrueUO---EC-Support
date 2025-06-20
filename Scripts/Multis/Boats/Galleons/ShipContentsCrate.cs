@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Server.Items
 {
-    public class ShipCrate : SmallCrate
+    public class ShipCrate : LargeCrate
     {
         public static readonly int DT = 30;
 
@@ -43,95 +43,6 @@ namespace Server.Items
                 list.Add(1116515, m_Owner.Name);
             else
                 list.Add("a shipping crate");
-        }
-
-        public override void GetContextMenuEntries(Mobile from, List<ContextMenuEntry> list)
-        {
-            base.GetContextMenuEntries(from, list);
-            list.Add(new DestroyCrate(from, this));
-
-            if (m_Boat != null && Items.Count > 0)
-                list.Add(new LoadShip(from, this));
-        }
-
-        private class DestroyCrate : ContextMenuEntry
-        {
-            private readonly Mobile m_From;
-            private readonly ShipCrate m_Crate;
-
-            public DestroyCrate(Mobile from, ShipCrate crate) : base(1116522, 3)
-            {
-                m_From = from;
-                m_Crate = crate;
-            }
-
-            public override void OnClick()
-            {
-                m_From.SendGump(new InternalGump(m_Crate));
-            }
-        }
-
-        private class LoadShip : ContextMenuEntry
-        {
-            private readonly Mobile m_From;
-            private readonly ShipCrate m_Crate;
-
-            public LoadShip(Mobile from, ShipCrate crate)
-                : base(1116521, 3) //Load Ship from Crate
-            {
-                m_From = from;
-                m_Crate = crate;
-            }
-
-            public override void OnClick()
-            {
-                if (m_Crate == null || m_Crate.Boat == null)
-                    return;
-
-                Container hold;
-
-                if (m_Crate.Boat is BaseGalleon galleon)
-                    hold = galleon.GalleonHold;
-                else
-                    hold = m_Crate.Boat.Hold;
-
-                if (hold == null)
-                    return;
-
-                if (m_From.InRange(m_Crate.Boat.Location, Mobiles.DockMaster.DryDockDistance))
-                {
-                    List<Item> items = new List<Item>(m_Crate.Items);
-
-                    for (var index = 0; index < items.Count; index++)
-                    {
-                        Item item = items[index];
-
-                        hold.DropItem(item);
-                    }
-
-                    m_From.SendMessage("You hold has been loaded from the shipping crate.");
-                }
-                else
-                    m_From.SendLocalizedMessage(1116519); //I can't find your ship! You need to bring it in closer.
-            }
-        }
-
-        private class InternalGump : BaseConfirmGump
-        {
-            private readonly ShipCrate m_Crate;
-
-            public override int LabelNumber => 1116523;  // Are you sure you want to destroy your shipping crate and its contents?
-
-            public InternalGump(ShipCrate crate)
-            {
-                m_Crate = crate;
-            }
-
-            public override void Confirm(Mobile from)
-            {
-                if (m_Crate != null)
-                    m_Crate.Delete();
-            }
         }
 
         public override void OnDoubleClick(Mobile from)

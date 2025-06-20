@@ -72,7 +72,7 @@ namespace Server.Items
             private readonly Mobile _From;
 
             public ChangeSignText(HolidaysSign sign, Mobile from)
-                : base(1158829)
+                : base(1158829, -1, 382)
             {
                 Sign = sign;
                 _From = from;
@@ -105,7 +105,7 @@ namespace Server.Items
             private readonly Item Sign;
 
             public ToggleOnOff(Item sign)
-                : base(1155742)
+                : base(1155742, -1, 360)
             {
                 Sign = sign;
             }

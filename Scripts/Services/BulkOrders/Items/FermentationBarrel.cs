@@ -329,7 +329,7 @@ namespace Server.Items
             private readonly FermentationBarrel _Barrel;
 
             public BeginFermentation(Mobile m, FermentationBarrel barrel)
-                : base(1157231, 2) // Begin Fermentation
+                : base(1157231, 2, 363) // Begin Fermentation
             {
                 m_Mobile = m;
                 _Barrel = barrel;
@@ -412,7 +412,7 @@ namespace Server.Items
             private readonly FermentationBarrel _Barrel;
 
             public EmptyBarrel(Mobile m, FermentationBarrel barrel)
-                : base(1157232, 2) // Empty Barrel
+                : base(1157232, 2, 364) // Empty Barrel
             {
                 m_Mobile = m;
                 _Barrel = barrel;
@@ -475,7 +475,7 @@ namespace Server.Items
             private readonly FermentationBarrel _Barrel;
 
             public Rename(Mobile m, FermentationBarrel barrel)
-                : base(1157233, 2) // Rename Vintage
+                : base(1157233, 2, 365) // Rename Vintage
             {
                 m_Mobile = m;
                 _Barrel = barrel;
@@ -587,7 +587,7 @@ namespace Server.Items
             private readonly Mobile m_Mobile;
 
             public FermentationHelp(Mobile mobile)
-                : base(1061037, 2) // Help
+                : base(1061037, 2, 366) // Help
             {
                 m_Mobile = mobile;
             }

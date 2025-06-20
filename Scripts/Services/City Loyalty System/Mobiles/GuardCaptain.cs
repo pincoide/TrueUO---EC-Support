@@ -102,7 +102,7 @@ namespace Server.Engines.CityLoyalty
             public GuardCaptain Guard { get; }
 
             public InternalEntry(PlayerMobile from, GuardCaptain guard)
-                : base(1152366, 3) // City Banner
+                : base(1152366, 3, 1009) // City Banner
             {
                 Player = from;
                 Guard = guard;

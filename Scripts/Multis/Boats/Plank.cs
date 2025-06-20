@@ -235,32 +235,6 @@ namespace Server.Items
             }
         }
 
-        public override void GetContextMenuEntries(Mobile from, List<ContextMenuEntry> list)
-        {
-            base.GetContextMenuEntries(from, list);
-            if (!from.Alive && Boat.Contains(from))
-            {
-                list.Add(new PlanksContext(from, this));
-            }
-        }
-
-        public class PlanksContext : ContextMenuEntry
-        {
-            private readonly Plank m_Plank;
-            private readonly Mobile m_From;
-
-            public PlanksContext(Mobile from, Plank plank) : base(6132, 10)
-            {
-                m_Plank = plank;
-                m_From = from;
-            }
-
-            public override void OnClick()
-            {
-                m_Plank.OnDoubleClick(m_From);
-            }
-        }
-
         public override void OnDoubleClickDead(Mobile from)
         {
             OnDoubleClick(from);

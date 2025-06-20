@@ -75,7 +75,7 @@ namespace Server.Mobiles
             private readonly IEnumerable<ItemTileButtonInfo> m_Buttons;
 
             public TurnInEntry(Mobile mobile, BaseTurnInMobile vendor)
-                : base(vendor.TurnInLocalization, 2)
+                : base(vendor.TurnInLocalization, 2, 347)
             {
                 m_Mobile = mobile;
                 m_Vendor = vendor;
@@ -108,7 +108,7 @@ namespace Server.Mobiles
             private readonly BaseTurnInMobile m_Vendor;
 
             public ClaimEntry(Mobile mobile, BaseTurnInMobile vendor)
-                : base(vendor.ClaimLocalization, 2)
+                : base(vendor.ClaimLocalization, 2, 348)
             {
                 m_Mobile = mobile;
                 m_Vendor = vendor;

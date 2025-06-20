@@ -90,7 +90,7 @@ namespace Server.Items
             private readonly Mobile m_From;
 
             public StableEntry(ChickenCoop coop, Mobile from)
-                : base(1112556, 12) // Stable a chicken
+                : base(1112556, 12, 318) // Stable a chicken
             {
                 m_Coop = coop;
                 m_From = from;
@@ -108,7 +108,7 @@ namespace Server.Items
             private readonly Mobile m_From;
 
             public ClaimEntry(ChickenCoop coop, Mobile from)
-                : base(1112557, 12) // Claim a chicken
+                : base(1112557, 12, 319) // Claim a chicken
             {
                 m_Coop = coop;
                 m_From = from;

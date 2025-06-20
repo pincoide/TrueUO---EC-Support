@@ -240,7 +240,7 @@ namespace Server.Mobiles
             private readonly BaseVendor m_Vendor;
 
             public BulkOrderInfoEntry(Mobile from, BaseVendor vendor)
-                : base(6152, -1)
+                : base(6152, -1, 403)
             {
                 Enabled = vendor.CheckVendorAccess(from);
 
@@ -291,7 +291,7 @@ namespace Server.Mobiles
             private readonly BaseVendor m_Vendor;
 
             public BribeEntry(Mobile from, BaseVendor vendor)
-                : base(1152294, 2)
+                : base(1152294, 2, 419)
             {
                 Enabled = vendor.CheckVendorAccess(from);
 
@@ -324,7 +324,7 @@ namespace Server.Mobiles
             private readonly BaseVendor m_Vendor;
 
             public ClaimRewardsEntry(Mobile from, BaseVendor vendor)
-                : base(1155593, 3)
+                : base(1155593, 3, 348)
             {
                 Enabled = vendor.CheckVendorAccess(from);
 
@@ -2697,7 +2697,7 @@ namespace Server.ContextMenus
         private readonly BaseVendor m_Vendor;
 
         public VendorBuyEntry(Mobile from, BaseVendor vendor)
-            : base(6103, 8)
+            : base(6103, 8, 608)
         {
             m_Vendor = vendor;
             Enabled = vendor.CheckVendorAccess(from);
@@ -2714,7 +2714,7 @@ namespace Server.ContextMenus
         private readonly BaseVendor m_Vendor;
 
         public VendorSellEntry(Mobile from, BaseVendor vendor)
-            : base(6104, 8)
+            : base(6104, 8, 111)
         {
             m_Vendor = vendor;
             Enabled = vendor.CheckVendorAccess(from);
@@ -2732,7 +2732,7 @@ namespace Server.ContextMenus
         public BaseVendor Vendor { get; set; }
 
         public UpgradeMageArmor(Mobile from, BaseVendor vendor)
-            : base(1154114) // Convert Mage Armor
+            : base(1154114, -1, 422) // Convert Mage Armor
         {
             Enabled = vendor.CheckVendorAccess(from);
 

@@ -699,10 +699,8 @@ namespace Server.Engines.BulkOrders
                         else // Set Price | Buy
                         {
                             if (m_Book.IsChildOf(m_From.Backpack))
-                            {
                                 m_From.Prompt = new SetPricePrompt(m_Book, obj, m_Page, m_List);
-                                m_From.SendLocalizedMessage(1062383); // Type in a price for the deed:
-                            }
+
                             else if (m_Book.RootParent is PlayerVendor pv)
                             {
                                 VendorItem vi = pv.GetVendorItem(m_Book);
@@ -743,12 +741,13 @@ namespace Server.Engines.BulkOrders
 
         private class SetPricePrompt : Prompt
         {
-            public override int MessageCliloc => 1062383;
+            public override int MessageCliloc => 1062383; // Type in a price for the deed:
             private readonly BulkOrderBook m_Book;
             private readonly object m_Object;
             private readonly int m_Page;
             private readonly ArrayList m_List;
             public SetPricePrompt(BulkOrderBook book, object obj, int page, ArrayList list)
+                : base( book, 51 )
             {
                 m_Book = book;
                 m_Object = obj;

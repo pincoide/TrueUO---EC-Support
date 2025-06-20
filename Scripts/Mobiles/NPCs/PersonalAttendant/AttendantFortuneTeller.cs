@@ -40,7 +40,7 @@ namespace Server.Mobiles
         public override void AddCustomContextEntries(Mobile from, List<ContextMenuEntry> list)
         {
             if (from.Alive && IsOwner(from))
-                list.Add(new AttendantUseEntry(this, 6245));
+                list.Add(new AttendantUseEntry(this, 6245, 624)); // tell fortune
 
             base.AddCustomContextEntries(from, list);
         }

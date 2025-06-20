@@ -330,7 +330,7 @@ namespace Server.Mobiles
             private readonly Mannequin _Mannequin;
 
             public ViewSuitsEntry(Mobile from, Mannequin m)
-                : base(1159296, 3) // View Suit Stats
+                : base(1159296, 3, 958) // View Suit Stats
             {
                 _From = from;
                 _Mannequin = m;
@@ -348,7 +348,7 @@ namespace Server.Mobiles
             private readonly Mannequin _Mannequin;
 
             public CompareWithItemInSlotEntry(Mobile from, Mannequin m)
-                : base(1159295, 3) // View Suit Stats With Selected Item
+                : base(1159295, 3, 956) // Compare With Item In Slot
             {
                 _From = from;
                 _Mannequin = m;
@@ -391,7 +391,7 @@ namespace Server.Mobiles
             private readonly Mannequin _Mannequin;
 
             public ViewSuitsSelectItemEntry(Mobile from, Mannequin m)
-                : base(1159297, 3) // View Suit Stats With Selected Item
+                : base(1159297, 3, 957) // View Suit Stats With Selected Item
             {
                 _From = from;
                 _Mannequin = m;
@@ -427,7 +427,7 @@ namespace Server.Mobiles
             private readonly Mannequin _Mannequin;
 
             public AddDescriptionEntry(Mobile from, Mannequin m)
-                : base(1159411, 3) // Add Description
+                : base(1159411, 3, 961) // Add Description
             {
                 _From = from;
                 _Mannequin = m;
@@ -491,7 +491,7 @@ namespace Server.Mobiles
             private readonly Mobile _Mannequin;
 
             public CustomizeBodyEntry(Mobile from, Mobile m)
-                : base(1151585, 4)
+                : base(1151585, 4, 1003)
             {
                 _From = from;
                 _Mannequin = m;
@@ -509,7 +509,7 @@ namespace Server.Mobiles
             private readonly Mannequin _Mannequin;
 
             public SwitchClothesEntry(Mobile from, Mannequin m)
-                : base(1151606, 2)
+                : base(1151606, 2, 1007)
             {
                 _From = from;
                 _Mannequin = m;
@@ -614,7 +614,7 @@ namespace Server.Mobiles
             private readonly Mobile _Mannequin;
 
             public RotateEntry(Mobile from, Mobile m)
-                : base(1151586, 2)
+                : base(1151586, 2, 1004)
             {
                 _From = from;
                 _Mannequin = m;
@@ -640,7 +640,7 @@ namespace Server.Mobiles
             private readonly Mobile _Mannequin;
 
             public RedeedEntry(Mobile from, Mobile m)
-                : base(1151601, 2)
+                : base(1151601, 2, 1006)
             {
                 _From = from;
                 _Mannequin = m;

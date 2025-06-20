@@ -86,7 +86,7 @@ namespace Server.Mobiles
         {
             if (from.Alive && IsOwner(from))
             {
-                list.Add(new AttendantUseEntry(this, 6248));
+                list.Add(new AttendantUseEntry(this, 6248, 629)); // set herald options
                 list.Add(new HeraldSetAnnouncementTextEntry(this));
                 list.Add(new HeraldSetGreetingTextEntry(this));
                 list.Add(new AttendantDismissEntry(this));
@@ -642,7 +642,7 @@ namespace Server.ContextMenus
     {
         private readonly AttendantHerald m_Attendant;
         public HeraldSetAnnouncementTextEntry(AttendantHerald attendant)
-            : base(6247)
+            : base(6247, -1, 628)
         {
             m_Attendant = attendant;
         }
@@ -660,7 +660,7 @@ namespace Server.ContextMenus
     {
         private readonly AttendantHerald m_Attendant;
         public HeraldSetGreetingTextEntry(AttendantHerald attendant)
-            : base(6246)
+            : base(6246, -1, 627)
         {
             m_Attendant = attendant;
         }

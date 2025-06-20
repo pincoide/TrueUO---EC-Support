@@ -2620,10 +2620,8 @@ namespace Server.Network
 
                         int index = pvSrc.ReadUInt16();
 
-                        if (state.IsEnhancedClient && index > 0x64)
-                        {
-                            index = menu.GetIndexEC(index);
-                        }
+                        // get the correct return code for the menu entry
+                        index = menu.GetReturnCode(index);
 
                         if (index >= 0 && index < menu.Entries.Length)
                         {

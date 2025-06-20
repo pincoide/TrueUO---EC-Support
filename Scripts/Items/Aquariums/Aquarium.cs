@@ -982,7 +982,7 @@ namespace Server.Items
             private readonly Aquarium m_Aquarium;
 
             public ExamineEntry(Aquarium aquarium)
-                : base(6235, 2)// Examine Aquarium
+                : base(6235, 2, 734)// Examine Aquarium
             {
                 m_Aquarium = aquarium;
             }
@@ -1001,7 +1001,7 @@ namespace Server.Items
             private readonly Aquarium m_Aquarium;
 
             public CollectRewardEntry(Aquarium aquarium)
-                : base(6237, 2)// Collect Reward
+                : base(6237, 2, 736)// Collect Reward
             {
                 m_Aquarium = aquarium;
             }
@@ -1020,7 +1020,7 @@ namespace Server.Items
             private readonly Aquarium m_Aquarium;
 
             public ViewEventEntry(Aquarium aquarium)
-                : base(6239, 2)// View events
+                : base(6239, 2, 738)// View events
             {
                 m_Aquarium = aquarium;
             }
@@ -1045,7 +1045,7 @@ namespace Server.Items
             private readonly Aquarium m_Aquarium;
 
             public CancelVacationMode(Aquarium aquarium)
-                : base(6240, 2)// Cancel vacation mode
+                : base(6240, 2, 739)// Cancel vacation mode
             {
                 m_Aquarium = aquarium;
             }

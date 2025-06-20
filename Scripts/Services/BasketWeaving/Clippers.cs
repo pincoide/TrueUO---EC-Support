@@ -60,9 +60,9 @@ namespace Server.Items
             if (pm == null)
                 return;
 
-            list.Add(new ToggleClippings(pm, true, false, false, 1112282)); //Set to clip plants
-            list.Add(new ToggleClippings(pm, false, true, false, 1112283)); //Set to cut reeds
-            list.Add(new ToggleClippings(pm, false, false, true, 1150660)); //Set to cut topiaries
+            list.Add(new ToggleClippings(pm, true, false, false, 1112282, 316)); //Set to clip plants
+            list.Add(new ToggleClippings(pm, false, true, false, 1112283, 317)); //Set to cut reeds
+            list.Add(new ToggleClippings(pm, false, false, true, 1150660, 328)); //Set to cut topiaries
         }
 
         private class ToggleClippings : ContextMenuEntry
@@ -72,8 +72,8 @@ namespace Server.Items
             private readonly bool m_Valuereeds;
             private readonly bool m_Valuetopiaries;
 
-            public ToggleClippings(PlayerMobile mobile, bool valueclips, bool valuereeds, bool valuetopiaries, int number)
-                : base(number)
+            public ToggleClippings(PlayerMobile mobile, bool valueclips, bool valuereeds, bool valuetopiaries, int number, int returnCode = -1)
+                : base(number, -1, returnCode)
             {
                 m_Mobile = mobile;
                 m_Valueclips = valueclips;

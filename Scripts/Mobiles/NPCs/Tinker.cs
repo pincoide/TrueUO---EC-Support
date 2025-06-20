@@ -69,7 +69,7 @@ namespace Server.Mobiles
             private readonly BaseEngravingTool Tool;
 
             public RechargeEntry(Mobile from, Mobile vendor)
-                : base(6271, 6)
+                : base(6271, 6, 170)
             {
                 m_From = from;
                 m_Vendor = vendor;

@@ -286,7 +286,7 @@ namespace Server.Items
             public Mobile Clicker { get; }
 
             public OpenMapEntry(Mobile from, VendorSearchMap map)
-                : base(3006150, 1) // Open Map
+                : base(3006150, 1, 10) // Open Map
             {
                 VendorMap = map;
                 Clicker = from;
@@ -304,7 +304,7 @@ namespace Server.Items
             private Mobile Clicker { get; }
 
             public TeleportEntry(Mobile from, VendorSearchMap map)
-                : base(1154558, -1) // Teleport To Vendor
+                : base(2032, -1, 1015) // Teleport
             {
                 VendorMap = map;
                 Clicker = from;
@@ -330,7 +330,7 @@ namespace Server.Items
             private Mobile Clicker { get; }
 
             public ReturnTeleportEntry(Mobile from, VendorSearchMap map)
-                : base(1154636, -1) // Return to Previous Location
+                : base(1154636, -1, 1015) // Return to Previous Location
             {
                 VendorMap = map;
                 Clicker = from;
@@ -352,7 +352,7 @@ namespace Server.Items
             private Container Container { get; }
 
             public OpenContainerEntry(Mobile from, VendorSearchMap map)
-                : base(1154699, -1) // Open Container Containing Item
+                : base(1154699, -1, 1018) // Open Container Containing Item
             {
                 VendorMap = map;
                 Clicker = from;

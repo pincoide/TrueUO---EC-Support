@@ -1228,7 +1228,7 @@ namespace Server.Items
             private readonly BaseCannon m_Cannon;
 
             public DismantleContext(BaseCannon cannon, Mobile from)
-                : base(1116069, 3)
+                : base(1116069, 3, 920)
             {
                 m_From = from;
                 m_Cannon = cannon;
@@ -1270,7 +1270,7 @@ namespace Server.Items
             private readonly BaseCannon m_Cannon;
 
             public RepairContext(BaseCannon cannon, Mobile from)
-                : base(1116602, 3)
+                : base(1116602, 3, 932)
             {
                 m_From = from;
                 m_Cannon = cannon;

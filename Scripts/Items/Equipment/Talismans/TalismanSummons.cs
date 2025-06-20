@@ -189,7 +189,7 @@ namespace Server.Mobiles
             private readonly Mobile m_Mobile;
 
             public TalismanReleaseEntry(Mobile m)
-                : base(6118, 3)
+                : base(6118, 3, 138)
             {
                 m_Mobile = m;
             }

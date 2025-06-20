@@ -161,10 +161,10 @@ namespace Server.Items
             };
             list.Add(miningEntry);
 
-            list.Add(new ToggleMiningStoneEntry(pm, MiningType.OreOnly, 6176));         // Set To Ore
-            list.Add(new ToggleMiningStoneEntry(pm, MiningType.OreAndStone, 6177));     // Set To Ore and Stone
-            list.Add(new ToggleMiningStoneEntry(pm, MiningType.OreAndGems, 1112237));   // Set To Ore and Gems
-            list.Add(new ToggleMiningStoneEntry(pm, MiningType.StoneOnly, 1156864));    // Set To Stone
+            list.Add(new ToggleMiningStoneEntry(pm, MiningType.OreOnly, 6176, 504) );         // Set To Ore
+            list.Add(new ToggleMiningStoneEntry(pm, MiningType.OreAndStone, 6177, 505) );     // Set To Ore and Stone
+            list.Add(new ToggleMiningStoneEntry(pm, MiningType.OreAndGems, 1112237, 507) );   // Set To Ore and Gems
+            list.Add(new ToggleMiningStoneEntry(pm, MiningType.StoneOnly, 1156864, 631) );    // Set To Stone
         }
 
         public class ToggleMiningStoneEntry : ContextMenuEntry
@@ -174,8 +174,8 @@ namespace Server.Items
             //private bool m_Valuestone;
             //private bool m_Valuegem;
 
-            public ToggleMiningStoneEntry(PlayerMobile mobile, MiningType type, int number)
-                : base(number)
+            public ToggleMiningStoneEntry(PlayerMobile mobile, MiningType type, int number, int returnCode = -1)
+                : base(number, -1, returnCode)
             {
                 m_Mobile = mobile;
                 MiningType = type;

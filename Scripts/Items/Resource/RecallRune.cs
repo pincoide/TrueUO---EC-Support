@@ -1,6 +1,10 @@
+using Server.Gumps;
 using Server.Multis;
+using Server.Network;
 using Server.Prompts;
 using Server.Regions;
+using System.Text;
+using static Server.Config;
 
 namespace Server.Items
 {
@@ -356,7 +360,7 @@ namespace Server.Items
             {
                 number = 0;
 
-                from.Prompt = new RenamePrompt(this);
+                from.Prompt = new RenamePrompt( this );
             }
             else
             {
@@ -408,10 +412,11 @@ namespace Server.Items
 
         private class RenamePrompt : Prompt
         {
-            public override int MessageCliloc => 501804;
+            public override int MessageCliloc => 501804;  // Please enter a description for this marked object:
             private readonly RecallRune m_Rune;
 
             public RenamePrompt(RecallRune rune)
+                : base(rune, 21)
             {
                 m_Rune = rune;
             }

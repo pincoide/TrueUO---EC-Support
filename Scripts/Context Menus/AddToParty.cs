@@ -7,7 +7,7 @@ namespace Server.ContextMenus
         private readonly Mobile m_From;
         private readonly Mobile m_Target;
         public AddToPartyEntry(Mobile from, Mobile target)
-            : base(0197, 12)
+            : base(0197, 12, 810)
         {
             m_From = from;
             m_Target = target;

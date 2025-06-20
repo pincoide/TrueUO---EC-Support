@@ -131,13 +131,13 @@ namespace Server.Items
             list.Add(1060741, m_Charges.ToString()); // charges: ~1_val~
         }
 
-        public override void GetContextMenuEntries(Mobile from, List<ContextMenuEntry> list)
+        public override void GetContextMenuEntries( Mobile from, List<ContextMenuEntry> list )
         {
-            base.GetContextMenuEntries(from, list);
+            base.GetContextMenuEntries( from, list );
 
-            if (from.Alive)
+            if ( from.Alive )
             {
-                list.Add(new UseBagEntry(this, Charges > 0 && IsChildOf(from.Backpack)));
+                list.Add( new UseBagEntry( this, Charges > 0 && IsChildOf( from.Backpack ) ) );
             }
         }
 
@@ -186,12 +186,12 @@ namespace Server.Items
         {
             private readonly BagOfSending m_Bag;
 
-            public UseBagEntry(BagOfSending bag, bool enabled)
-                : base(6189)
+            public UseBagEntry( BagOfSending bag, bool enabled )
+                : base( 6189, -1, 10 )
             {
                 m_Bag = bag;
 
-                if (!enabled)
+                if ( !enabled )
                 {
                     Flags |= CMEFlags.Disabled;
                 }
@@ -199,16 +199,16 @@ namespace Server.Items
 
             public override void OnClick()
             {
-                if (m_Bag.Deleted)
+                if ( m_Bag.Deleted )
                 {
                     return;
                 }
 
                 Mobile from = Owner.From;
 
-                if (from.CheckAlive())
+                if ( from.CheckAlive() )
                 {
-                    m_Bag.OnDoubleClick(from);
+                    m_Bag.OnDoubleClick( from );
                 }
             }
         }
@@ -242,8 +242,6 @@ namespace Server.Items
                 }
                 else if (targeted is Item item)
                 {
-                    int reqCharges = 1; 
-
                     if (!item.IsChildOf(from.Backpack))
                     {
                         from.SendLocalizedMessage(1054152); // You may only send items from your backpack to your bank box.
@@ -260,17 +258,17 @@ namespace Server.Items
                     {
                         from.SendLocalizedMessage(1062089); // You cannot use that here.
                     }
-                    else if (!from.BankBox.TryDropItem(from, item, false))
+                    else if ( m_Bag.Charges == 0 )
+                    {
+                        from.SendLocalizedMessage( 1042544 ); // This item is out of charges.
+                    }
+                    else if (!from.BankBox.TryDropItem(from, item, false)) // this must always be the last check
                     {
                         from.SendLocalizedMessage(1054110); // Your bank box is full.
                     }
-                    else if (reqCharges > m_Bag.Charges)
-                    {
-                        from.SendLocalizedMessage(1042544); // This item is out of charges.
-                    }
                     else
                     {
-                        m_Bag.Charges -= reqCharges;
+                        m_Bag.Charges--;
                         from.SendLocalizedMessage(1054150); // The item was placed in your bank box.
                     }
                 }

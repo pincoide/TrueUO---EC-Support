@@ -1203,7 +1203,7 @@ namespace Server.Items
             public BaseShipCannon Cannon { get; }
 
             public UnloadContext(BaseShipCannon cannon, Mobile from)
-                : base(1116072, 2) // Unload
+                : base(1116072, 2, 922) // Unload
             {
                 From = from;
                 Cannon = cannon;
@@ -1224,7 +1224,7 @@ namespace Server.Items
             public BaseShipCannon Cannon { get; }
 
             public DismantleContext(BaseShipCannon cannon, Mobile from)
-                : base(1116069, 2)
+                : base(1116069, 2, 920)
             {
                 From = from;
                 Cannon = cannon;
@@ -1270,7 +1270,7 @@ namespace Server.Items
             public BaseShipCannon Cannon { get; }
 
             public RepairContext(BaseShipCannon cannon, Mobile from)
-                : base(1116602, 2)
+                : base(1011071, 2, 932)
             {
                 From = from;
                 Cannon = cannon;

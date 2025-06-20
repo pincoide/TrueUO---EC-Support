@@ -84,7 +84,7 @@ namespace Server.Mobiles
             private readonly Mobile m;
 
             public AskAboutFutureEntry(Mobile from, Sphynx Sphynx)
-                : base(6199, 8)
+                : base(6199, 8, 414)
             {
                 m_Sphynx = Sphynx;
                 m = from;

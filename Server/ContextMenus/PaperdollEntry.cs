@@ -5,7 +5,7 @@ namespace Server.ContextMenus
 		private readonly Mobile m_Mobile;
 
 		public PaperdollEntry(Mobile m)
-			: base(6123, 18)
+			: base(6123, 18, 520)
 		{
 			m_Mobile = m;
 		}

@@ -4560,7 +4560,7 @@ namespace Server.Multis
         private readonly ISecurable m_Securable;
 
         public SetSecureLevelEntry(Item item, ISecurable securable)
-            : base(6203, 6)
+            : base(6203, 6, 600)
         {
             m_Item = item;
             m_Securable = securable;
@@ -4637,7 +4637,7 @@ namespace Server.Multis
         public BaseHouse House { get; set; }
 
         public ReLocateEntry(Mobile m, Item item, BaseHouse house)
-            : base(1159158, 8) // Relocate Container
+            : base(1159158, 8, 1022) // Relocate Container
         {
             Item = item;
             Mobile = m;
@@ -4748,7 +4748,7 @@ namespace Server.Multis
         public BaseHouse House { get; set; }
 
         public ReleaseEntry(Mobile m, Item item, BaseHouse house)
-            : base(1153880, 8) // Retrieve
+            : base(1153880, 8, 1012) // Retrieve
         {
             Item = item;
             Mobile = m;

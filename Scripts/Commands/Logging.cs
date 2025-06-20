@@ -81,7 +81,7 @@ namespace Server.Commands
 
             try
             {
-                m_Output.WriteLine("{0}: {1}: {2}", DateTime.UtcNow, from == null ? "System" : from.NetState.ToString(), text);
+                m_Output.WriteLine("{0}: {1}: {2}", DateTime.UtcNow, from == null ? "System" : (from.NetState == null ? "System" : from.NetState.ToString()), text);
 
                 string path = Core.BaseDirectory;
                 string name = "System";

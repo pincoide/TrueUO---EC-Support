@@ -3889,7 +3889,7 @@ namespace Server.Mobiles
             private readonly BaseCreature m_Mobile;
 
             public TameEntry(Mobile from, BaseCreature creature)
-                : base(6130, 6)
+                : base(6130, 6, 301)
             {
                 m_Mobile = creature;
 
@@ -3924,7 +3924,7 @@ namespace Server.Mobiles
             private readonly BaseCreature m_Creature;
 
             public RenameEntry(Mobile from, BaseCreature creature)
-                : base(1111680, 6)
+                : base(1155270, 6, 919)
             {
                 m_From = from;
                 m_Creature = creature;
@@ -3944,7 +3944,7 @@ namespace Server.Mobiles
             private readonly BaseCreature m_Creature;
 
             public PetRenamePrompt(BaseCreature creature)
-                : base(creature)
+                : base( creature, 68 )
             {
                 m_Creature = creature;
             }

@@ -17,6 +17,8 @@ namespace Server.Guilds
             pm.CloseGump(typeof(CreateGuildGump));
             pm.CloseGump(typeof(BaseGuildGump));
 
+            TypeID = 725;
+
             AddPage(0);
 
             AddBackground(0, 0, 500, 300, 0x2422);

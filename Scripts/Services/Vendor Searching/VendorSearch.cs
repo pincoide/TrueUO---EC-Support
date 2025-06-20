@@ -1352,7 +1352,7 @@ namespace Server.Engines.VendorSearching
         public PlayerMobile Player { get; }
 
         public SearchVendors(PlayerMobile pm)
-            : base(1154679, -1)
+            : base(1154679, -1, 1016)
         {
             Player = pm;
 

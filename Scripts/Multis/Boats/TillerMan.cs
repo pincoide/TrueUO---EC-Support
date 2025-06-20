@@ -186,7 +186,7 @@ namespace Server.Items
             private readonly Mobile m_From;
 
             public EmergencyRepairEntry(TillerMan tillerman, Mobile from)
-                : base(1116589, 5)
+                : base(1116589, 5, 930)
             {
                 m_TillerMan = tillerman;
                 m_From = from;
@@ -217,7 +217,7 @@ namespace Server.Items
             private readonly Mobile m_From;
 
             public ShipRepairEntry(TillerMan tillerman, Mobile from)
-                : base(1116590, 5)
+                : base(1116590, 5, 931)
             {
                 m_TillerMan = tillerman;
                 m_From = from;
@@ -243,7 +243,7 @@ namespace Server.Items
             private readonly Mobile m_From;
 
             public RenameShipEntry(TillerMan tillerman, Mobile from)
-                : base(1111680, 3)
+                : base(1115557, 3, 936)
             {
                 m_TillerMan = tillerman;
                 m_From = from;

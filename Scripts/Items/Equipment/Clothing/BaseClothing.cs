@@ -287,7 +287,7 @@ namespace Server.Items
             private readonly BaseClothing m_Item;
 
             public UnBlessEntry(Mobile from, BaseClothing item)
-                : base(6208, -1)
+                : base(6208, -1, 514)
             {
                 m_From = from;
                 m_Item = item; // BaseArmor, BaseWeapon or BaseClothing

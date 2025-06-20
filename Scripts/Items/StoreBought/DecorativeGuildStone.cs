@@ -66,7 +66,7 @@ namespace Server.Items
             private readonly Mobile _Mobile;
 
             public UpdateGuildInfoEntry(Mobile from, DecorativeGuildstone gs)
-                : base(1159486, 12) // Update Guild Information
+                : base(1159486, 12, 1023) // Update Guild Information
             {
                 _Mobile = from;
                 _GuildStone = gs;

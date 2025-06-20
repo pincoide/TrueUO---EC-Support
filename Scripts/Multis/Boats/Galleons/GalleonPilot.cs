@@ -5,6 +5,7 @@ using Server.Multis;
 using Server.Targeting;
 using System;
 using System.Collections.Generic;
+using System.Xml.Linq;
 
 namespace Server.Mobiles
 {
@@ -277,7 +278,7 @@ namespace Server.Mobiles
             private readonly Mobile m_From;
 
             public EmergencyRepairEntry(GalleonPilot pilot, Mobile from)
-                : base(1116589, 5) // Emergency Repairs
+                : base(1116589, 5, 930) // Emergency Repairs
             {
                 m_Pilot = pilot;
                 m_From = from;
@@ -308,7 +309,7 @@ namespace Server.Mobiles
             private readonly Mobile m_From;
 
             public ShipRepairEntry(GalleonPilot pilot, Mobile from)
-                : base(1116590, 5) // Permanent Repairs
+                : base(1116590, 5, 931) // Permanent Repairs
             {
                 m_Pilot = pilot;
                 m_From = from;
@@ -334,7 +335,7 @@ namespace Server.Mobiles
             private readonly Mobile m_From;
 
             public MoveTillermanEntry(GalleonPilot pilot, Mobile from)
-                : base(1116729, 5) // Move Tillerman
+                : base(1116729, 5, 938) // Move Tillerman
             {
                 m_Pilot = pilot;
                 m_From = from;
@@ -413,7 +414,7 @@ namespace Server.Mobiles
             private readonly Mobile m_From;
 
             public SecuritySettingsEntry(GalleonPilot pilot, Mobile from)
-                : base(1149786, 5) // Security Settings
+                : base(6203, 5, 934) // Set Security
             {
                 m_Pilot = pilot;
                 m_From = from;
@@ -432,7 +433,7 @@ namespace Server.Mobiles
             private readonly Mobile m_From;
 
             public ResetSecuritySettings(GalleonPilot pilot, Mobile from)
-                : base(1060700, 5) // Reset Security
+                : base(1060700, 5, 935) // Reset Security
             {
                 m_Pilot = pilot;
                 m_From = from;
@@ -482,7 +483,7 @@ namespace Server.Mobiles
                 else
                     nameStr = $"the {Galleon.ShipName}";
 
-                list.Add($"{Name} the Pilot of {nameStr}");
+                list.Add( 1050045, $"{string.Empty} \t{Name}\t the Pilot of {nameStr}" ); // ~1_PREFIX~~2_NAME~~3_SUFFIX~
             }
             else
                 base.AddNameProperties(list);

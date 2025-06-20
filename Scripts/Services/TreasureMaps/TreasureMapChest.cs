@@ -747,7 +747,7 @@ namespace Server.Items
             private readonly Mobile m_From;
             private readonly TreasureMapChest m_Chest;
             public RemoveEntry(Mobile from, TreasureMapChest chest)
-                : base(6149, 3)
+                : base(6149, 3, 306)
             {
                 m_From = from;
                 m_Chest = chest;

@@ -19,6 +19,8 @@ namespace Server.Engines.VeteranRewards
         public RewardChoiceGump(Mobile from, int cat, int page)
             : base(100, 100)
         {
+            TypeID = 453;
+
             m_From = from;
 
             from.CloseGump(typeof(RewardChoiceGump));

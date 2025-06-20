@@ -111,10 +111,10 @@ namespace Server.Items
             {
                 BraceletOfBinding bound = Bound;
 
-                list.Add(new BraceletEntry(Activate, 6170, bound != null));
-                list.Add(new BraceletEntry(Search, 6171, bound != null));
-                list.Add(new BraceletEntry(Bind, bound == null ? 6173 : 6174, true));
-                list.Add(new BraceletEntry(Inscribe, 6175, true));
+                list.Add(new BraceletEntry(Activate, 6170, bound != null, 500));
+                list.Add(new BraceletEntry(Search, 6171, bound != null, 501));
+                list.Add(new BraceletEntry(Bind, bound == null ? 6173 : 6174, true, 502));
+                list.Add(new BraceletEntry(Inscribe, 6175, true, 503));
             }
         }
 
@@ -202,10 +202,7 @@ namespace Server.Items
                 from.SendLocalizedMessage(1042664); // You must have the object in your backpack to use it.
             }
             else
-            {
-                from.SendLocalizedMessage(1054009); // Enter the text to inscribe upon the bracelet :
                 from.Prompt = new InscribePrompt(this);
-            }
         }
 
         public override void Serialize(GenericWriter writer)
@@ -338,8 +335,8 @@ namespace Server.Items
         private class BraceletEntry : ContextMenuEntry
         {
             private readonly BraceletCallback m_Callback;
-            public BraceletEntry(BraceletCallback callback, int number, bool enabled)
-                : base(number)
+            public BraceletEntry(BraceletCallback callback, int number, bool enabled, int returnCode = -1)
+                : base(number, -1, returnCode)
             {
                 m_Callback = callback;
 
@@ -446,7 +443,10 @@ namespace Server.Items
         private class InscribePrompt : Prompt
         {
             private readonly BraceletOfBinding m_Bracelet;
+            public override int MessageCliloc => 1054009; // Enter the text to inscribe upon the bracelet :
+
             public InscribePrompt(BraceletOfBinding bracelet)
+                : base( bracelet, 10008 )
             {
                 m_Bracelet = bracelet;
             }

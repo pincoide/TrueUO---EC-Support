@@ -116,7 +116,7 @@ namespace Server.Items
         private readonly PlayerMobile _From;
 
         public EditSign(ICustomizableMessageItem messageItem, PlayerMobile from)
-            : base(1151817) // Edit Sign
+            : base(1151817, -1, 1008) // Edit Sign
         {
             _MessageItem = messageItem;
             _From = from;
